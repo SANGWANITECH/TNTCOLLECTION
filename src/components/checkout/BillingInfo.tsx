@@ -20,7 +20,7 @@ const BillingInfo: NextPage = () => {
     const billingFields = [
         { label: 'Email', placeholder: 'you@example.com', value: email, setValue: setEmail },
         { label: 'Phone Number', placeholder: '+265...', value: phoneNumber, setValue: setPhoneNumber },
-        { label: 'Street Address', placeholder: '123 Main St', value: streetAddress, setValue: setStreetAddress },
+        { label: 'District', placeholder: 'karonga', value: streetAddress, setValue: setStreetAddress },
     ];
 
     //state
@@ -45,7 +45,7 @@ const BillingInfo: NextPage = () => {
         <div>
             <div>
                 <h4 className={'text-h4'}>Checkout</h4>
-                <p className={'text-sm text-text-secondary'}>Complete your order details below</p>
+                <p className={'text-sm text-text-secondary py-2 m-3'}>Complete your order details below</p>
             </div>
             <div className={'card flex flex-col gap-2 p-4'}>
                 <div className={'flex items-center gap-2'}>
@@ -98,61 +98,7 @@ const BillingInfo: NextPage = () => {
                     ))}
                 </div>
 
-                {/*city, state, zipCode country*/}
-                <div className={'grid grid-cols-2 gap-2 sm:grid-cols-4'}>
-                    <div className={'flex flex-col gap-1'}>
-                        <label className={'text-sm'}>City</label>
-                        <InputField
-                            type={'text'}
-                            placeholder={'New York'}
-                            className={'px-2'}
-                            required
-                            value = {city}
-                            onChange = {(e:React.ChangeEvent<HTMLInputElement>) => {setCity(e.target.value)}}
-                        />
-                    </div>
-
-                    <div className={'flex flex-col gap-1'}>
-                        <label className={'text-sm'}>State</label>
-                        <select
-                            className="card text-sm"
-                            required
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                        >
-                            {states.map(({ code, name }) => (
-                                <option key={code} value={code}>{name}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div className={'flex flex-col gap-1'}>
-                        <label className={'text-sm'}>Zip Code</label>
-                        <InputField
-                            type={'text'}
-                            placeholder={'10001'}
-                            className={'px-2'}
-                            required
-                            value = {zipCode}
-                            onChange = {(e:React.ChangeEvent<HTMLInputElement>) => {setZipCode(e.target.value)}}
-                        />
-                    </div>
-
-                    <div className={'flex flex-col gap-1'}>
-                        <label className={'text-sm'}>Country</label>
-                        <select
-                            className="card text-sm"
-                            required
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                        >
-                            {countries.map(({ code, name }) => (
-                                <option key={code} value={code}>{name}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                </div>
+              
             </div>
         </div>
     )

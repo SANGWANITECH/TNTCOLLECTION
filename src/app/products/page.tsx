@@ -1,9 +1,12 @@
 import { NextPage } from "next";
 
+import FeaturedContent from "@/components/home/FeaturedContent";
+
 const Products: NextPage = () => {
     return(
+  
         <div>
-            <h1 className="text-h1 text-center">Product Listing Page</h1>
+        <FeaturedContent />
         </div>
     )
 }

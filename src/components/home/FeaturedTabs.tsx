@@ -22,11 +22,13 @@ interface Props {
 }
 
 const tabs = [
-    {id:'all',label:'All products'},
-    { id: 'men', label: 'Men\'s clothing' },
-    { id: 'women', label: 'Women\'s clothing' },
-    { id: 'electronics', label: 'Electronics' },
-    { id: "jewelery", label: "Jewelery" },
+    {id:'all',label:'All'},
+    { id: 'men', label: 'Men clothes' },
+    { id: 'women', label: 'Women clothes' },
+    { id: 'electronics', label: 'footwear' },
+    { id: "jewelery", label: "bags" },
+    { id: "jewelery", label: "kids clothes" },
+    { id: "jewelery", label: "Fashion & Accessories" }
 ]
 
 const FeaturedTabs: React.FC<Props> = ({ tabData }) => {

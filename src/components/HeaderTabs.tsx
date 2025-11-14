@@ -1,26 +1,29 @@
+// src/components/HeaderTabs.tsx
 'use client'
 import { NextPage } from "next";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const HeaderTabs: NextPage = () => {
-    const pathname = usePathname();
+  const pathname = usePathname();
+  const activeTab = (href: string) => 
+    pathname === href 
+      ? 'font-heading font-bold text-foreground' 
+      : 'font-heading font-medium text-foreground/70 hover:text-foreground transition-colors';
 
-    const activeTab = (href: string) => pathname === href ? 'font-semibold' : 'font-normal';
-
-    return(
-    <div className="hidden md:flex gap-6 ">
-        <p>
-            <Link href={'/'} className={`${activeTab('/')}`}>Home</Link>
-        </p>
-        <p>
-            <Link href={'/products'} className={`${activeTab('/products')}`}>Products</Link>
-        </p>
-        <p>
-            <Link href={'/categories'} className={`${activeTab('/categories')}`}>Categories</Link>
-        </p>
+  return (
+    <div className="hidden md:flex gap-6 lg:gap-8 items-center">
+      <Link href="/" className={activeTab('/')}>
+        Home
+      </Link>
+      <Link href="/products" className={activeTab('/products')}>
+        Products
+      </Link>
+      <Link href="/categories" className={activeTab('/categories')}>
+        Contact
+      </Link>
     </div>
-    )
-}
+  );
+};
 
 export default HeaderTabs;
