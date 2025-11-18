@@ -50,7 +50,7 @@ const AddCart: NextPage <Props>= ({product}) => {
             onClick={handleAddToCart}
         >
         <ShoppingCartIcon className="w-4 h-4"/>
-        Add
+        Add to cart
         </Button>
     )
 }

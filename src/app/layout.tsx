@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zenvoka",
-  description: "Zenvoka is a modern ecommerce brand offering curated essentials with clean design, fluid responsiveness, and semantic clarity. Discover products that elevate everyday living through simplicity and style.",
+  title: "TNT COLLECTION",
+  description: "TNT COLLECTION is a modern ecommerce brand offering curated essentials with clean design, fluid responsiveness, and semantic clarity. Discover products that elevate everyday living through simplicity and style.",
 };
 
 export default function RootLayout({

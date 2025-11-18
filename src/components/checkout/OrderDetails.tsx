@@ -34,10 +34,8 @@ const OrderDetails : NextPage = () => {
         <div className={'flex flex-col gap-8'}>
             {/* Billing Information */}
            <BillingInfo />
-            {/*Shipping Method*/}
-            <ShippingMethod />
-            {/* Payment Method */}
-            <PaymentMethod />
+           
+           
 
             {/*terms and conditions*/}
             <div className="flex items-center gap-1 px-4">

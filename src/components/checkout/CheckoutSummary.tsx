@@ -28,10 +28,7 @@ const CheckoutSummary: NextPage = () => {
                         Shipping
                         <span>${shippingCost}</span>
                     </p>
-                    <p className={'flex justify-between text-sm'}>
-                        Tax
-                        <span>${tax}</span>
-                    </p>
+                  
                 </div>
                 <div className={'border-t border-border-light dark:border-border-dark mt-2 pt-2'}>
                     <p className={'flex justify-between text-sm font-semibold'}>
