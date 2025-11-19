@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <>
       {/* HEADER BAR */}
-      <div className="flex justify-between md:justify-center md:gap-[var(--gap-fluid)] fixed left-0 top-0 right-0 items-center border-b border-border-light dark:border-border-dark py-2 backdrop-blur-2xl px-4 sm:px-6 lg:px-8 z-50 bg-background/90 shadow-sm">
+      <div className="flex justify-between md:justify-center md:gap-[var(--gap-fluid)] fixed left-0 top-0 right-0 items-center border-b border-border-light dark:border-border-dark py-2 backdrop-blur-2xl px-4 sm:px-6 lg:px-8 z-50 bg-background/90">
         
         {/* LOGO */}
         <div>
