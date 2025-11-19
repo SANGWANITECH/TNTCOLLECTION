@@ -1,12 +1,13 @@
-// src/app/auth/verify/page.tsx
-import { Suspense } from "react";
 import VerifyForm from "@/components/auth/VerifyForm";
+import { Suspense } from "react";
 
+export default function VerifyPage(){
 
-export default function VerifyPage() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <VerifyForm />
-        </Suspense>
-    );
+        <div className={'flex flex-col gap-8 text-center pt-20 px-2'}>
+            <Suspense fallback={<div>Loading...</div>}>
+                <VerifyForm />
+            </Suspense>
+        </div>
+    )
 }
