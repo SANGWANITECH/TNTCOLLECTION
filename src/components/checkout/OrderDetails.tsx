@@ -4,15 +4,12 @@ import {useCart} from "@/context/CartContext";
 import {ShoppingCartIcon} from "lucide-react";
 import Link from "next/link";
 import GoBackButton from "@/components/GoBackButton";
-import React from "react";
+import React, {useState} from "react";
 import BillingInfo from "@/components/checkout/BillingInfo";
-import ShippingMethod from "@/components/checkout/ShippingMethod";
-import PaymentMethod from "@/components/checkout/PaymentMethod";
-import {useAuth} from "@/context/AuthContext";
 
 const OrderDetails : NextPage = () => {
     const {cartItems} = useCart();
-    const {setAcceptedTerms} = useAuth();
+    const [terms, setAcceptedTerms] = useState(false);
 
 
     if(cartItems.length === 0){
