@@ -1,8 +1,8 @@
 import LoginForm from "@/components/auth/LoginForm";
 import { NextPage } from "next";
 
+const Login: NextPage = async () => {
 
-const Login: NextPage = () => {
     return (
         <div className="text-center flex flex-col gap-8 px-4 pt-20">
             <div className={'flex flex-col gap-2'}>
