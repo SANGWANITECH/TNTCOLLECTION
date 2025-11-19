@@ -1,14 +1,43 @@
 'use client'
 import { NextPage } from "next";
 import InputField from "@/components/Inputfield";
-import {useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {Button} from "@/components/ui/button";
+import {useRouter} from "next/navigation";
 
 
 const LoginForm: NextPage = () => {
-    const [email, setEmail] = useState<string>('')
+    const [email, setEmail] = useState<string>('');
+    const [status, setStatus] = useState('');
+    const [error, setError] = useState<boolean>(false);
+    const router = useRouter();
+
+    const requestOTP = async (e:FormEvent) => {
+        e.preventDefault();
+
+        setError(false)
+        setStatus("Sending code...");
+        const res = await fetch('/api/auth/send-otp',{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email})
+        });
+
+        const json = await res.json();
+        if (!res.ok) {
+            setStatus(`Error: ${json.error}`)
+            setError(true)
+            return
+        }
+
+        //SUCCESS -> redirect to verify page
+        router.push(`/auth/verify?email=${encodeURIComponent(email)}`);
+    }
+
     return (
-            <form className={'card w-full max-w-xl mx-auto'}>
+            <form onSubmit={requestOTP} className={'card w-full max-w-xl mx-auto'}>
                 <div className={'flex flex-col text-start gap-1 mb-4'}>
                 <label className={'font-medium'}>Email</label>
                 <InputField
@@ -20,9 +49,14 @@ const LoginForm: NextPage = () => {
                     onChange = {(e:React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)}
                 />
                 </div>
-
+                {status && <p className={`text-sm text-gray-600 mb-2 ${error?"text-red-600" : "text-green-600"}`}>{status}</p>}
                 <div>
-                    <Button variant={'primary'}>Sign In</Button>
+                    <Button
+                        variant={'primary'}
+                        type={'submit'}
+                    >
+                        Sign In
+                    </Button>
                 </div>
 
                 <div className={'flex items-center my-4'}>
