@@ -1,141 +1,63 @@
 'use client'
-
-import { Button } from "@/components/ui/button";
 import { NextPage } from "next";
 import InputField from "@/components/Inputfield";
-import { useState } from "react";
-import { ArrowLeft, User, Lock, EyeIcon,EyeClosed } from "lucide-react";
-import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
+import {useState} from "react";
+import {Button} from "@/components/ui/button";
+
 
 const LoginForm: NextPage = () => {
-    const { setIsLoggedIn } = useAuth();
-
-    const [userName, setUserName] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [success, setSuccess] = useState<boolean>(true);
-    const [error, setError] = useState<boolean>(false);
-    const [message, setMessage] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false)
-
-    const togglePassword = () => {
-        setShowPassword(prev => !prev)
-    }
-
-    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
-       
-        const res = await fetch('/api/auth/login',{
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify({userName, password})
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-        setMessage(data.message || "Failed to Login.");
-        setError(true);
-        setSuccess(false);
-        setLoading(false);
-        setTimeout(() => setMessage(""), 4000);
-        return;
-        }
-
-        setMessage(data.message || "Login successful!");
-        setError(false);
-        setSuccess(true);
-        setLoading(false);
-        setTimeout(() => setMessage(""), 4000);
-
-        setIsLoggedIn(true);
-    }
-
+    const [email, setEmail] = useState<string>('')
     return (
-            <form 
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4 border border-border-light dark:border-border-dark shadow-xl  m-auto p-4 rounded-2xl w-full max-w-[450px]">
-                <h5 className="text-h5">Sign In</h5>
-                <p className="text-small text-text-secondary">Enter your credentials to access your account</p>
-                
-                {message && (
-                <div className={`border-x-2 py-2 ${error?'border-x-red-500 bg-red-200 text-black':''} ${success?'border-x-green-500 bg-green-100 text-black':''}`}>
-                    {message}
-                </div>)}
-
-
-                <div className="flex flex-col gap-2 border-b-2 border-border-light pb-4 dark:border-border-dark">
-                    <div className="flex flex-col items-start">
-                    <label className="text-body">Username</label>
-                    <div className="w-full flex items-center">
-                        <User className="w-4 h-4 z-1" />
-                        <InputField
-                        required 
-                        type="text"
-                        className="w-full px-6 ml-[-20px]"
-                        value={userName}
-                        placeholder="Enter your username"
-                        onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setUserName(e.target.value)}
-                        />
-                    </div>
-                    </div>
-
-                    <div className="flex flex-col items-start">
-                    <label className="text-body">Password</label>
-                    <div className="w-full flex items-center">
-                        <Lock className="w-4 h-4 z-1"/>
-                        <InputField
-                        type= {showPassword?'text':'password'}
-                        placeholder="Enter your password"
-                        className="w-full px-6 ml-[-20px] mr-[-20px]"
-                        value={password}
-                        required
-                        onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)}                    
-                        />
-                        {showPassword?(
-                            <EyeIcon className="w-4 h-4 cursor-pointer z-1" onClick={togglePassword}/>
-                        ):(
-                            <EyeClosed className="w-4 h-4 cursor-pointer z-1" onClick={togglePassword}/>
-                        )}
-                        
-                    </div>
-                    </div>
-                    <Button
-                    variant={"primary"}
-                    type="submit"
-                    disabled = {loading}
-                    className="mt-4"
-                    >
-                        {loading ? "Signing In ...": "Sign In"}
-                    </Button>
+            <form className={'card w-full max-w-xl mx-auto'}>
+                <div className={'flex flex-col text-start gap-1 mb-4'}>
+                <label className={'font-medium'}>Email</label>
+                <InputField
+                    type={'text'}
+                    placeholder={'admin@gmail.com'}
+                    className={'p-2'}
+                    required
+                    value={email}
+                    onChange = {(e:React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)}
+                />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                    <p className="text-small text-text-secondary">Don&apos;t have an account? Try our demo:</p>
-                    <Button
-                    variant={"inverted"}
-                    onClick={()=>{
-                        setPassword('83r5^_');
-                        setUserName('mor_2314');
-                    }}
-                    disabled = {loading}
-                    >
-                        Use Demo Account
-                    </Button>
-                    <p className="text-sm text-text-secondary">Username: mor_2314 | Password: 83r5^_</p>
+                <div>
+                    <Button variant={'primary'}>Sign In</Button>
+                </div>
 
-                    <div>
-                        <Link href="/">
-                            <Button className="font-semibold">
-                              <ArrowLeft className="w-4 h-4"/>
-                             Back To Home
-                           </Button>
-                        </Link>
-                    </div>
+                <div className={'flex items-center my-4'}>
+                    <div className={'flex-grow border-t border-border-light dark:border-border-dark'}/>
+                    <span>Or</span>
+                    <div className={'flex-grow border-t border-border-light dark:border-border-dark'}/>
+                </div>
+
+                <div className={'flex justify-center'}>
+                    <Button className="flex items-center gap-2 border border-border-light dark:border-border-dark w-full sm:w-fit">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 48 48"
+                            width="24px"
+                            height="24px"
+                        >
+                            <path
+                                fill="#4285F4"
+                                d="M24 9.5c3.94 0 6.7 1.71 8.26 3.14l6.05-6.05C34.46 3.58 29.73 1.5 24 1.5 14.73 1.5 7.02 7.64 4.1 15.9l7.04 5.47C12.3 15.06 17.73 9.5 24 9.5z"
+                            />
+                            <path
+                                fill="#34A853"
+                                d="M46.5 24.5c0-1.63-.15-3.18-.43-4.68H24v9.18h12.7c-.55 2.96-2.2 5.46-4.7 7.14l7.2 5.6c4.2-3.88 7.3-9.6 7.3-17.24z"
+                            />
+                            <path
+                                fill="#FBBC05"
+                                d="M11.14 28.37c-1.02-2.96-1.02-6.28 0-9.24l-7.04-5.47C2.02 17.36 1.5 20.6 1.5 24c0 3.4.52 6.64 2.6 10.34l7.04-5.97z"
+                            />
+                            <path
+                                fill="#EA4335"
+                                d="M24 46.5c6.48 0 11.92-2.14 15.9-5.82l-7.2-5.6c-2.02 1.38-4.6 2.2-8.7 2.2-6.27 0-11.7-5.56-12.86-12.1l-7.04 5.97C7.02 40.36 14.73 46.5 24 46.5z"
+                            />
+                        </svg>
+                        Continue with Google
+                    </Button>
                 </div>
             </form>
     )

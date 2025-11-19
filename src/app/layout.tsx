@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Heade";
 import Footer from "@/components/Footer";
-import { AuthProvider } from "@/context/AuthProvider";
 import { CartProvider } from "@/context/CartProvider";
 
 
@@ -33,7 +32,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        <AuthProvider>
           <CartProvider>
             <ThemeProvider
               attribute="class"
@@ -48,7 +46,6 @@ export default function RootLayout({
               <Footer />
             </ThemeProvider>
           </CartProvider>
-        </AuthProvider>
       </body>
     </html>
   );

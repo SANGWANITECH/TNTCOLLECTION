@@ -1,6 +1,5 @@
 'use client'
 
-import { useAuth } from "@/context/AuthContext";
 import { User } from "lucide-react";
 import { NextPage } from "next";
 import Link from "next/link";
@@ -8,7 +7,7 @@ import Link from "next/link";
 
 
 const UserStatusIndicator:NextPage = () => {
-    const { isLoggedIn } = useAuth();
+    const isLoggedIn = false
 
 
     return(

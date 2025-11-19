@@ -112,7 +112,7 @@
 --color-neutral-400: #a1a1aa;  /* light gray text */
 --color-neutral-500: #8e96a6;  /* current --color-light-gray */
 --color-neutral-600: #6b7280;  
---color-neutral-700: #4b5563;  
+--color-neutral-700: #4b5563;
 --color-neutral-800: #2a2a2a;  /* current --color-dark-border */
 --color-neutral-900: #222831;  /* current --color-neutral-dark / button black */
 
@@ -120,12 +120,14 @@
   /*backgrounds*/
   --color-background-color:var(--color-neutral-50);
   --color-background-color-dark:#0a0a0a;
+
+    /*input colors*/
   --color-input-background: var(--color-neutral-100);
-  --color-input-background-dark:var(--color-neutral-900);
+  --color-input-background-dark:#E1E1E;
  
 
   /*borders*/
-  --color-border-light: var(--color-neutral-200);
+  --color-border-light: var(--color-neutral-300);
   --color-border-dark:var(--color-neutral-800);
 
   /*Text*/
@@ -199,12 +201,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Add to your globals.css */
+
 .drop-shadow-glow {
   text-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
 }
 
-/* Add to globals.css */
 .bg-gradient-to-t {
   background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), rgba(0,0,0,0.1));
 }
