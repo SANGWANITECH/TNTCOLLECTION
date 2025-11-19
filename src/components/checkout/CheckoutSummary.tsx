@@ -5,12 +5,12 @@ import {Lock, Star, CircleCheckBig, Shield} from "lucide-react";
 import EstimatedDelivery from "./EstimatedDelivery";
 import {Button} from "@/components/ui/button";
 import {useCart} from "@/context/CartContext";
-import {useAuth} from "@/context/AuthContext";
+
 
 
 const CheckoutSummary: NextPage = () => {
     const {cartItems, subtotal, shippingCost, tax} = useCart();
-    const {acceptedTerms} = useAuth();
+    const acceptedTerms = true;
 
     if(cartItems.length === 0) return  null;
 
