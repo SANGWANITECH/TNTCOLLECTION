@@ -16,7 +16,7 @@ const UserStatusIndicator:NextPage = () => {
                 <User className="w-4 h-4"/>
                 <div className="absolute h-2 w-2 rounded-full bg-green-500 top-[-4px] right-[-4px]"/>
             </div>):(
-                <Link href={'/auth/login'}>
+                <Link href={'/tnt/auth/login'}>
                     <User className="w-4 h-4"/>
                 </Link>
             )}

@@ -7,20 +7,26 @@ import { ModeToggle } from "./theme-toggle";
 import HeaderTabs from "./HeaderTabs";
 import UserStatusIndicator from "./UserStatusIndicator";
 import CartNotificatiion from "./CartNotification";
+import {usePathname} from "next/navigation";
+
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const currentPath = usePathname();
+  const isAdminPage = currentPath.startsWith("/admin");
 
+    {/*Don't display header on admin*/}
+    if (isAdminPage) return null;
   return (
     <>
       {/* HEADER BAR */}
       <div className="flex justify-between md:justify-center md:gap-[var(--gap-fluid)] fixed left-0 top-0 right-0 items-center border-b border-border-light dark:border-border-dark py-2 backdrop-blur-2xl px-4 sm:px-6 lg:px-8 z-50 bg-background/90">
-        
+
         {/* LOGO */}
         <div>
           {/* Mobile logo: visible on small, hidden on md+ */}
           <Link
-            href="/"
+            href="/tnt"
             className="block md:hidden shiny-text text-2xl font-heading font-bold hover:scale-105 transition-transform duration-300"
           >
             T&T
@@ -28,7 +34,7 @@ const Header = () => {
 
           {/* Desktop logo: hidden on small, visible on md+ */}
           <Link
-            href="/"
+            href="/tnt"
             className="hidden md:block shiny-text text-2xl font-heading font-bold hover:scale-105 transition-transform duration-300"
           >
             T&T-COLLECTION
@@ -58,7 +64,7 @@ const Header = () => {
           {/* CART */}
           <div className="relative group">
             <Link
-              href="/cart"
+              href="/tnt/cart"
               className="p-2 rounded-full hover:bg-accent/10 dark:hover:bg-accent/20 transition-all duration-300 group-hover:scale-110"
             >
               <ShoppingCart className="w-5 h-5 text-foreground/70 group-hover:text-accent" />
@@ -98,21 +104,21 @@ const Header = () => {
         <div className="flex flex-col gap-6 p-6">
           <nav className="flex flex-col gap-4 text-lg font-heading">
             <Link
-              href="/"
+              href="/tnt"
               className="text-foreground/80 hover:text-foreground transition-colors py-2 border-b border-border-light/20 dark:border-border-dark/20"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
-              href="/products"
+              href="/tnt/products"
               className="text-foreground/80 hover:text-foreground transition-colors py-2 border-b border-border-light/20 dark:border-border-dark/20"
               onClick={() => setMobileMenuOpen(false)}
             >
               Products
             </Link>
             <Link
-              href="/categories"
+              href="/tnt/categories"
               className="text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >

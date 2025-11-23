@@ -13,13 +13,13 @@ const HeaderTabs: NextPage = () => {
 
   return (
     <div className="hidden md:flex gap-6 lg:gap-8 items-center">
-      <Link href="/" className={activeTab('/')}>
+      <Link href="/" className={activeTab('/tnt')}>
         Home
       </Link>
-      <Link href="/products" className={activeTab('/products')}>
+      <Link href="/tnt/products" className={activeTab('/tnt/products')}>
         Products
       </Link>
-      <Link href="/categories" className={activeTab('/categories')}>
+      <Link href="/tnt/categories" className={activeTab('/tnt/categories')}>
         Contact
       </Link>
     </div>

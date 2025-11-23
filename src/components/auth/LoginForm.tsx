@@ -33,7 +33,7 @@ const LoginForm: NextPage = () => {
         }
 
         //SUCCESS -> redirect to verify page
-        router.push(`/auth/verify?email=${encodeURIComponent(email)}`);
+        router.push(`/tnt/auth/verify?email=${encodeURIComponent(email)}`);
     }
 
     return (
