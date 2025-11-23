@@ -15,18 +15,18 @@ const CheckoutSummary: NextPage = () => {
     if(cartItems.length === 0) return  null;
 
     return (
-            <div className={'card p-4 flex flex-col gap-4 sticky top-20'}>
+            <div className={'card p-4 flex flex-col gap-4 t-20'}>
                 <h5 className={'text-h5'}>
                     Checkout Summary
                 </h5>
                 <div className={'flex flex-col gap-2'}>
                     <p className={'flex justify-between text-sm'}>
                         subtotal
-                        <span>${subtotal}</span>
+                        <span>${(subtotal).toFixed(2)}</span>
                     </p>
                     <p className={'flex justify-between text-sm'}>
                         Shipping
-                        <span>${shippingCost}</span>
+                        <span>${(shippingCost).toFixed(2)}</span>
                     </p>
                   
                 </div>

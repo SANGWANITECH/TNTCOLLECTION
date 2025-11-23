@@ -7,9 +7,9 @@ import OrderSummary from "@/components/cart/OrderSummary";
 
 const Cart: NextPage = () => {
     return(
-        <div className="px-2">
+        <div className="sm:max-w-[600px] sm:mx-auto md:max-w-[700px] lg:max-w-[1000px] xl:max-w-[1200px]">
             <div>
-                <Link href={'/'}>
+                <Link href={'/tnt/products'}>
                     <Button className="text-sm">
                         <ArrowLeftIcon className="w-3 h-3"/>
                         Continue Shopping

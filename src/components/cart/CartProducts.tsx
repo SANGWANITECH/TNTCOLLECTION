@@ -20,7 +20,7 @@ const CartProducts: NextPage = () => {
                 <h4 className="text-h4">Your cart is empty</h4>
                 <p className="text-sm">Looks like you haven&apos;t added any items to your cart yet.</p>
                 <div>
-                    <Link href={'/'}>
+                    <Link href={'/tnt'}>
                         <GoBackButton />
                     </Link>
 
@@ -60,7 +60,6 @@ const CartProducts: NextPage = () => {
                             <p className="text-sm bg-gray-100 rounded-full dark:bg-background-color-dark px-2 border border-border-light dark:border-border-dark w-[110px]">
                                 {cartItem.category}
                             </p>
-                            <p className="text-sm font-semibold">${cartItem.price}</p>
                         </div>
 
                         {/* 3rd section: quantity changer */}
@@ -96,7 +95,7 @@ const CartProducts: NextPage = () => {
                             </div>
                             {/*final card section */}
                             <div className="flex justify-between items-center flex-col gap-2 sm:items-start">
-                                <p className="font-medium text-sm">${cartItem.price * cartItem.quantity}</p>
+                                <p className="font-semibold text-sm">${cartItem.price * cartItem.quantity}</p>
                                 <button 
                                 onClick={()=>removeFromCart(cartItem.id)}
                                 className="text-red-500 dark:text-red-400 text-sm flex items-center gap-1 cursor-pointer">

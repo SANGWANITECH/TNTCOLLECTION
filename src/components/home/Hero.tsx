@@ -76,7 +76,7 @@ const Hero: NextPage = () => {
 
         {/* BUTTONS */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center mt-4">
-          <Link href="/products">
+          <Link href="/tnt/products">
             <Button className="
               w-full sm:w-auto px-8 py-4 text-lg font-medium 
               bg-white/10 text-white backdrop-blur-sm border border-white/20
@@ -86,7 +86,7 @@ const Hero: NextPage = () => {
               Shop Now
             </Button>
           </Link>
-          <Link href="/categories">
+          <Link href="/tnt/categories">
             <Button className="
               w-full sm:w-auto px-8 py-4 text-lg font-medium 
               bg-white/10 text-white backdrop-blur-sm border border-white/20

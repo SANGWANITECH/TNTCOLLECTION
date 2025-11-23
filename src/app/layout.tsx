@@ -30,22 +30,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable}`}
       >
-          <CartProvider>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
             >
-              <Header />
-              <div className="pt-21 pb-20 flex-grow">
+              <div>
                 {children}
               </div>
-              <Footer />
             </ThemeProvider>
-          </CartProvider>
       </body>
     </html>
   );

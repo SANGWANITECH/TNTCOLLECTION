@@ -61,7 +61,7 @@ const OrderSummary: NextPage = () => {
                                     <Truck className="w-4 h-4"/>
                                     Shipping
                                 </div>
-                                <span>{shippingCost}</span>
+                                <span>${(shippingCost).toFixed(2)}</span>
                             </div>
                             <p className="text-xs text-text-secondary">Free shipping on orders over $100</p>
                         </div>
@@ -74,7 +74,7 @@ const OrderSummary: NextPage = () => {
                             <Button
                                 variant={'primary'}
                                 className="text-sm"
-                                onClick={() => router.push("/cart/checkout")}
+                                onClick={() => router.push("/tnt/cart/checkout")}
                             >
                                 Proceed To Checkout
                             </Button>
