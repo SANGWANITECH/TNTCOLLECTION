@@ -41,16 +41,16 @@ export async function updateSession(request: NextRequest) {
         return NextResponse.redirect(url, 308) // 308 = permanent redirect
     }
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone()
-    url.pathname = '/tnt/auth/login'
-    return NextResponse.redirect(url)
-  }
+    if (
+        !user &&
+        !request.nextUrl.pathname.startsWith('/tnt/auth') &&
+        !request.nextUrl.pathname.startsWith('/login')
+    ) {
+        const url = request.nextUrl.clone()
+        url.pathname = '/tnt/auth/login'
+        return NextResponse.redirect(url)
+    }
+
 
   //if user is signed in and tries to access /auth ---> redirect to admin
   if(user && request.nextUrl.pathname.startsWith('/tnt/auth')){
