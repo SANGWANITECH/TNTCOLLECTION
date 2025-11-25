@@ -1,4 +1,13 @@
 // app/admin/page.tsx
+import {productsData} from "@/app/admin/lib/products";
+
+
 export default function AdminPage() {
-    return <h1>Welcome to the Admin Dashboard</h1>;
+   const product = productsData[0];
+
+    return (
+        <div>
+            {product.name}
+        </div>
+    );
 }

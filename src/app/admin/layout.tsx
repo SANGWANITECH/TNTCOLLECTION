@@ -1,6 +1,6 @@
 // app/admin/layout.tsx
 import React from "react";
-import AdminHeader from "@/components/adminComponents/AdminHeader";
+import AdminHeader from "./components/AdminHeader";
 
 
 export default function AdminLayout({
