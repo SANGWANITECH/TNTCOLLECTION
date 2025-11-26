@@ -1,9 +1,14 @@
 'use client'
 
 import Image from "next/image";
-import { EllipsisVertical } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react';
+import {Product} from "@/app/admin/types/product";
 
-export default function ProductCard({ product }) {
+type ProductCardProps = {
+    product: Product;
+}
+
+export default function ProductCard({ product }: ProductCardProps) {
     return (
         <div className="card p-2 flex flex-col gap-4">
             <div className="relative aspect-square rounded-md overflow-hidden group">
