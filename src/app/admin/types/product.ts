@@ -1,11 +1,13 @@
 export interface Product {
-    id: string;
+    id: number;
     name: string;
-    category: string;
-    targetGroup: string;
     price: number;
-    availability: 'available' | 'soldOut';
+    image: string;
+    target_group: string;
     description: string;
-    imageUrl: string;
+    category: string;
+    ordered: boolean;
+    is_available: boolean;
+    admin_id: string;
+    created_at: string;
 }
-
