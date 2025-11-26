@@ -66,7 +66,7 @@ export default function AdminSidebar() {
                     <ShieldUser className="w-5 h-5 text-green-500" />
                     T&T Admin
                 </h2>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-4">
                     {sidebarItems.map(({ label, icon: Icon, href }) => (
                         <Link
                             href={href}
