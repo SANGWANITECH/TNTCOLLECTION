@@ -55,13 +55,12 @@ export default function AdminSidebar() {
             {/* Sidebar */}
             <div
                 ref={sidebarRef}
-                className={`fixed md:static left-0 z-40
+                className={`fixed left-0 z-40
                 flex flex-col w-[200px] h-screen
                 p-4 shadow-md border-r border-border-light dark:border-border-dark
                 transform transition-transform duration-300 ease-in-out
                 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
               `}
-
             >
                 <h2 className="font-medium text-lg flex items-center gap-2 mb-4">
                     <ShieldUser className="w-5 h-5 text-green-500" />
