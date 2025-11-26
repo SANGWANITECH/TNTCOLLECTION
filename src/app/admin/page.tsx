@@ -1,13 +1,21 @@
 // app/admin/page.tsx
-import {productsData} from "@/app/admin/lib/products";
+import AdminSearchBar from "@/app/admin/components/AdminSearchBar";
+import ToggleCategory from "@/app/admin/components/ToggleCategory";
+import ToggleTargetGroup from "@/app/admin/components/ToggleTargetGroup";
 
 
 export default function AdminPage() {
-   const product = productsData[0];
 
     return (
         <div>
-            {product.name}
+            <div className={'w-full max-w-md mx-auto flex sm:hidden'}>
+                <AdminSearchBar />
+            </div>
+            <div>
+                <ToggleCategory />
+                <ToggleTargetGroup />
+            </div>
+
         </div>
     );
 }

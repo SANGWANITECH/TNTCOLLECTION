@@ -19,7 +19,7 @@ export default function AdminHeader() {
                 <Link href={'/admin/settings'}>Settings</Link>
             </div>
 
-            <div className={'flex-1 max-w-md'}>
+            <div className={'hidden sm:flex flex-1 max-w-md'}>
                 <AdminSearchBar />
             </div>
 

@@ -47,7 +47,7 @@ export default function AdminSidebar() {
             {/* Backdrop overlay on mobile */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 dark:bg-black bg-white bg-opacity-30 md:hidden"
+                    className="fixed inset-0  bg-opacity-30 md:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
@@ -57,7 +57,7 @@ export default function AdminSidebar() {
                 ref={sidebarRef}
                 className={`fixed left-0 z-40
                 flex flex-col w-[200px] h-screen
-                p-4 shadow-md border-r border-border-light dark:border-border-dark
+                p-4 shadow-md border-r bg-white dark:bg-background-color-dark border-border-light dark:border-border-dark
                 transform transition-transform duration-300 ease-in-out
                 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
               `}
