@@ -20,7 +20,7 @@ export default function ToggleTargetGroup() {
                 onChange={(e) => setSelectedTargetGroup(e.target.value)}
                 className={'card w-full dark:bg-white  bg-background-color-dark dark:text-text-primary text-white'}
             >
-                <option value="" className={'card'}>All Groups</option>
+                <option value="" className={'card'}>All </option>
                 {targetGroups.map((group) => (
                     <option key={group} value={group} className={'card'}>
                         {group}

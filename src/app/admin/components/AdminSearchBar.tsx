@@ -14,7 +14,7 @@ const AdminSearchBar: NextPage = () => {
         alert(`The form is submited! ${search}`);
     }
     return(
-        <div className={'w-full ml-4'}>
+        <div className={'w-full '}>
             <form onSubmit={handleSearch}>
                 <div className="flex items-center">
                     <Search
