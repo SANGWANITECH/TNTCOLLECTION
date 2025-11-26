@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="relative aspect-square rounded-md overflow-hidden group">
                 <Image
                     src={product.image}
-                    alt={product.title || 'product image'}
+                    alt={product.name || 'product image'}
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 250px"
                     style={{ objectFit: "contain" }}
