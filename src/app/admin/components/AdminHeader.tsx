@@ -1,15 +1,15 @@
-import { Menu, UserRoundIcon } from "lucide-react";
+import {  UserRoundIcon } from "lucide-react";
 import {ModeToggle} from "@/components/theme-toggle";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
-import InputField from "@/components/Inputfield";
+import ToggleSidebar from "@/app/admin/components/ToggleSidebar";
 import AdminSearchBar from "@/app/admin/components/AdminSearchBar";
 
 export default function AdminHeader() {
     return (
         <div className={'flex justify-between md:justify-center md:gap-[var(--gap-fluid)] fixed left-0 top-0 right-0 items-center border-b border-border-light dark:border-border-dark py-2 backdrop-blur-2xl px-4 sm:px-6 lg:px-8 z-50 bg-background/90'}>
             <div className={'flex gap-4 items-center'}>
-                <Menu className={'md:hidden w-5 h-5'}/>
+                <ToggleSidebar />
                 <h1>T&T <span className={'hidden md:inline-block'}>Collection</span></h1>
             </div>
 
