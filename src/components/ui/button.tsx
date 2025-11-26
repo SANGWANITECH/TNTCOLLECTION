@@ -24,6 +24,7 @@ const buttonVariants = cva(
         inverted: "bg-transparent border border-gray-400 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-[#1a1a1a]",
 
         primary: "bg-black text-white dark:bg-white dark:text-black hover:opacity-90",
+        admin: "bg-[#3B85F4] text-white",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
