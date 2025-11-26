@@ -17,7 +17,7 @@ export default function AdminLayout({
                            {/* Main content */}
                     <div className={'pt-12 flex-1 flex items-start'}>
                         <AdminSidebar />
-                        <main className={ " p-2 h-full w-full" }>
+                        <main className={ " p-2 h-full w-full md:ml-[200px]" }>
                             {children}
                         </main>
                     </div>
