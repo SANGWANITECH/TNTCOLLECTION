@@ -14,7 +14,7 @@ export default function ProductsList() {
     })
 
     return (
-        <div className="grid gap-4">
+        <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
             {filtered.map(product => (
                 <ProductCard key={product.id} product={product} />
             ))}

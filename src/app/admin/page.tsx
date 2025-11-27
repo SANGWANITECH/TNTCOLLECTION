@@ -8,20 +8,20 @@ import ProductsList from "@/app/admin/components/ProductsList";
 export default function AdminPage() {
 
     return (
-        <div className={'flex flex-col gap-4 p-2'}>
+        <div className={'flex flex-col xl:flex-row gap-4 p-2 xl:pt-16'}>
             <div className={'w-full flex sm:hidden pl-2'}>
                 <AdminSearchBar />
             </div>
-            <div className="w-full flex md:flex-col gap-2">
-                <div className="w-2/3 md:w-1/2 max-w-md">
+            <div className="w-full flex xl:flex-col gap-2 xl:max-w-xs">
+                <div className="w-2/3 md:w-full max-w-md">
                     <ToggleCategory />
                 </div>
 
-                <div className="w-1/3 md:w-1/2 max-w-md">
+                <div className="w-1/3 md:w-full max-w-md">
                     <ToggleTargetGroup />
                 </div>
             </div>
-            <div>
+            <div className={'flex-1 w-full'}>
                 <ProductsList />
             </div>
         </div>
