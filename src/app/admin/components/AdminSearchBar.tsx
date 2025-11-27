@@ -11,7 +11,7 @@ const AdminSearchBar: NextPage = () => {
     const handleSearch = (e:React.FormEvent) =>{
         e.preventDefault();
 
-        alert(`The form is submited! ${search}`);
+        alert(`The form is submitted! ${search}`);
     }
     return(
         <div className={'w-full '}>

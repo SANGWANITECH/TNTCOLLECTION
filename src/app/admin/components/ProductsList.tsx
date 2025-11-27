@@ -2,6 +2,7 @@
 
 import { useFilterCategory } from "@/app/admin/context/FilterCategoryContext"
 import ProductCard from "./ProductCard"
+import NoProductsFound from "@/app/admin/components/NoProductsFound";
 
 export default function ProductsList() {
     const { products, selectedCategory, selectedTargetGroup } = useFilterCategory()
@@ -12,6 +13,10 @@ export default function ProductsList() {
         const okGroup = selectedTargetGroup ? product.target_group === selectedTargetGroup : true
         return okCategory && okGroup
     })
+
+    if (filtered.length === 0) {
+        return <NoProductsFound />
+    }
 
     return (
         <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">

@@ -55,7 +55,7 @@ export default function AdminSidebar() {
             {/* Sidebar */}
             <div
                 ref={sidebarRef}
-                className={`fixed left-0 z-40
+                className={`fixed left-0 z-40 pt-10 lg:pt-16
                 flex flex-col w-[200px] h-screen
                 p-4 shadow-md border-r bg-white dark:bg-background-color-dark border-border-light dark:border-border-dark
                 transform transition-transform duration-300 ease-in-out
