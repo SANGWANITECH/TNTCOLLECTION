@@ -10,7 +10,7 @@ export default function AddProductPage() {
                     <ArrowLeft className={'w-5 h-5'} />
                     Back to list
                 </Link>
-                <h1 className={'flex-1 flex justify-center text-2xl font-medium'}> New Product </h1>
+                <h1 className={'flex-1 flex justify-center text-xl font-medium'}> New Product </h1>
             </div>
 
             <div>
