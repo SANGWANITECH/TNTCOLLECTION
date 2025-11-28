@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import UploadImage from "@/app/admin/add-product/components/UploadImage";
+import ProductDetails from "@/app/admin/add-product/components/ProductDetails";
 
 export default function AddProductPage() {
     return(
@@ -17,7 +18,9 @@ export default function AddProductPage() {
                 <div>
                     <UploadImage />
                 </div>
-                <div></div>
+                <div>
+                    <ProductDetails />
+                </div>
                 <div></div>
             </div>
         </div>
