@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 const sidebarItems = [
-    { label: "Dashboard", icon: LayoutDashboard, href: "/admin/dashboard" },
+    { label: "Dashboard", icon: LayoutDashboard, href: "/admin/" },
     { label: "Products", icon: ShoppingBasket, href: "/admin/products" },
     { label: "Add Product", icon: PackagePlus, href: "/admin/add-product" },
     { label: "Orders", icon: ShoppingBag, href: "/admin/orders" },
