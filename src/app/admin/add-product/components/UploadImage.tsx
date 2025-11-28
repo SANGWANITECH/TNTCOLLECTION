@@ -26,7 +26,8 @@ export default function UploadImage() {
     }
 
     return (
-        <div className="w-full max-w-sm">
+        <div className="card flex flex-col gap-2 w-full max-w-sm">
+            <p className={'text-lg'}>Add Product Image</p>
             {/* Relative wrapper for image + buttons */}
             <div className="relative w-full h-64 border border-border-light dark:border-border-dark rounded-md overflow-hidden bg-gray-100 dark:bg-neutral-800">
                 <label
@@ -48,20 +49,22 @@ export default function UploadImage() {
                 </label>
 
                 {image && (
-                    <div className="absolute top-2 right-2 flex gap-2 z-10">
-                        <label
-                            htmlFor="image-upload"
-                            className="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-800 cursor-pointer"
-                        >
-                            Replace
-                        </label>
-                        <button
-                            type="button"
-                            onClick={handleRemove}
-                            className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700"
-                        >
-                            Remove
-                        </button>
+                    <div className="absolute inset-0 z-10">
+                        <div className={'flex flex-col gap-4 items-center justify-center border border-border-light dark:border-border-dark h-full'}>
+                            <label
+                                htmlFor="image-upload"
+                                className="px-3 py-1 bg-gray-700/50 text-white text-sm rounded cursor-pointer"
+                            >
+                                Replace
+                            </label>
+                            <button
+                                type="button"
+                                onClick={handleRemove}
+                                className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 cursor-pointer"
+                            >
+                                Remove
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
