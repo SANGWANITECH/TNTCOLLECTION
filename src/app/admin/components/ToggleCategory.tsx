@@ -1,62 +1,40 @@
 'use client'
 
 import { useState } from "react"
-import { useFilterCategory } from "@/app/admin/context/FilterCategoryContext"
 import { ChevronDown, ChevronUp, Layers } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useCategories } from "@/app/admin/hooks/useCategories";
 
 export default function ToggleCategory() {
-    const {
-        products,
-        selectedCategory,
-        setSelectedCategory,
-    } = useFilterCategory()
-
+    const { tabs, selectedCategory, setSelectedCategory } = useCategories()
     const [open, setOpen] = useState(false)
-
-    // Unique categories
-    const categories = Array.from(new Set(products.map(p => p.category)))
-
-    const tabs = [
-        { id: "", label: "All Categories" },
-        ...categories.map(c => ({ id: c, label: c }))
-    ]
 
     return (
         <div className="card flex flex-col w-full p-2 rounded-xl relative">
-        {/* Header */}
+            {/* Header */}
             <div
                 className="flex items-center justify-between cursor-pointer"
                 onClick={() => setOpen(prev => !prev)}
             >
                 <p className="flex gap-2 items-center font-medium">
                     <Layers className="w-4 h-4" />
-                    <span className={'text-sm'}>{selectedCategory?`${selectedCategory}`:"Categories"}</span>
+                    <span className="text-sm">{selectedCategory || "Categories"}</span>
                 </p>
-
-                {open ? (
-                    <ChevronUp className="w-4 h-4" />
-                ) : (
-                    <ChevronDown className="w-4 h-4" />
-                )}
+                {open ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </div>
 
-            {/* Wrapper stays relative so absolute works */}
+            {/* Dropdown */}
             <div className="relative">
-
-                {/* Dropdown List */}
                 {open && (
                     <div
-                        className={`
-                flex flex-col gap-1 mt-2
-                lg:static lg:shadow-none lg:p-0 lg:bg-transparent
-                absolute left-0 right-0 z-50 top-3
-                p-2 rounded-xl
-                bg-background dark:bg-background-dark
-                shadow-md
-            `}
+                        className="flex flex-col gap-1 mt-2
+                       lg:static lg:shadow-none lg:p-0 lg:bg-transparent
+                       absolute left-0 right-0 z-50 top-3
+                       p-2 rounded-xl
+                       bg-background dark:bg-background-dark
+                       shadow-md"
                     >
-                        {tabs.map((tab) => (
+                        {tabs.map(tab => (
                             <Button
                                 key={tab.id}
                                 variant={selectedCategory === tab.id ? "primary" : "default"}
@@ -71,9 +49,7 @@ export default function ToggleCategory() {
                         ))}
                     </div>
                 )}
-
             </div>
-
         </div>
     )
 }
