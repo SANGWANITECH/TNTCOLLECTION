@@ -5,7 +5,7 @@ import ProductsList from "@/app/admin/components/ProductsList";
 
 export default function ProductsPage() {
     return (
-        <div className={'flex flex-col xl:flex-row gap-4 p-2 xl:pt-16'}>
+        <div className={'flex flex-col xl:flex-row gap-4 pt-2 xl:pt-16'}>
             <div className={'w-full flex sm:hidden pl-2'}>
                 <AdminSearchBar />
             </div>
