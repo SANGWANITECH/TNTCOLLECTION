@@ -15,14 +15,12 @@ export default function AddProductPage() {
                 <h1 className={'flex-1 flex justify-center text-xl font-medium'}> New Product </h1>
             </div>
 
-            <div className={'flex flex-col gap-6'}>
-                <div>
+            <div className={'flex flex-col gap-6 lg:flex-row items-center md:items-start justify-between xl:justify-center md:mt-10'}>
+                <div className={'w-full xl:max-w-md flex justify-around'}>
                     <UploadImage />
                 </div>
-                <div>
+                <div className={'flex flex-col gap-6 w-full xl:max-w-xl'}>
                     <ProductDetails />
-                </div>
-                <div>
                     <CreateProductButton />
                 </div>
             </div>

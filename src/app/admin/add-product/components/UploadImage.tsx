@@ -26,7 +26,7 @@ export default function UploadImage() {
     }
 
     return (
-        <div className="card flex flex-col gap-2 w-full max-w-sm">
+        <div className="card flex flex-col gap-2 w-full">
             <p className={'text-lg'}>Add Product Image</p>
             {/* Relative wrapper for image + buttons */}
             <div className="relative w-full h-64 border border-border-light dark:border-border-dark rounded-md overflow-hidden bg-gray-100 dark:bg-neutral-800">

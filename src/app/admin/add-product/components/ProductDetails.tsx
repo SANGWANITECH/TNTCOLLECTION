@@ -15,8 +15,8 @@ export default function ProductDetails() {
     const [availability, setAvailability] = useState("Available"); // single string now
 
     return (
-        <div className="card flex flex-col gap-2 w-full max-w-sm">
-            <p className="text-lg">Product Details</p>
+        <div className="card flex flex-col gap-2 w-full">
+            <p className="text-xl">Product Details</p>
 
             <form className="flex flex-col gap-2 pt-2 border-t border-border-light dark:border-border-dark">
                 <label>Product Name:</label>
@@ -31,7 +31,7 @@ export default function ProductDetails() {
                     }
                 />
 
-                <div className="w-full flex xl:flex-col gap-2 xl:max-w-xs">
+                <div className="w-full flex gap-2">
                     <div className="w-2/3 md:w-full max-w-md">
                         <label className="text-lg">Category</label>
                         <ToggleCategory />
@@ -43,8 +43,8 @@ export default function ProductDetails() {
                     </div>
                 </div>
 
-                <div className={'flex items-start gap-2'}>
-                    <div>
+                <div className={'flex items-start justify-between gap-2'}>
+                    <div className={' w-full max-w-[200px]'}>
                         <label className={'text-lg'}>Price (MKW):</label>
                         <Inputfield
                             type="text" // better than "number" if formatting
@@ -63,33 +63,35 @@ export default function ProductDetails() {
                         />
                     </div>
 
-                    <div>
+                    <div className={'pr-2'}>
                         <label className={'text-lg'}>Availability</label>
-                        <div>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="availability"
-                                    value="Available"
-                                    checked={availability === "Available"}
-                                    className={'text-xs'}
-                                    onChange={(e) => setAvailability(e.target.value)}
-                                />
-                                Available
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="availability"
-                                    value="Sold Out"
-                                    checked={availability === "Sold Out"}
-                                    className={'text-xs'}
-                                    onChange={(e) => setAvailability(e.target.value)}
-                                />
-                                Sold Out
-                            </label>
+                        <div className={'flex flex-col sm:flex-row sm:mt-2 sm:gap-2'}>
+                            <div>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="availability"
+                                        value="Available"
+                                        checked={availability === "Available"}
+                                        className={'text-xs'}
+                                        onChange={(e) => setAvailability(e.target.value)}
+                                    />
+                                    Available
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="availability"
+                                        value="Sold Out"
+                                        checked={availability === "Sold Out"}
+                                        className={'text-xs'}
+                                        onChange={(e) => setAvailability(e.target.value)}
+                                    />
+                                    Sold Out
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
