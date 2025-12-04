@@ -7,11 +7,7 @@ import { useCategories } from "@/app/admin/hooks/useCategories";
 
 
 
-type Props = {
-    isAll: boolean,
-}
-
-export default function ToggleCategory({ isAll }: Props) {
+export default function ToggleCategory() {
     const { tabs, selectedCategory, setSelectedCategory } = useCategories()
     const [open, setOpen] = useState(false)
 
