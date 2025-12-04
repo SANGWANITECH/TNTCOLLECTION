@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import UploadImage from "@/app/admin/add-product/components/UploadImage";
-import ProductDetails from "@/app/admin/add-product/components/ProductDetails";
-import CreateProductButton from "@/app/admin/add-product/components/CreateProductButton";
+import AddProduct from "@/app/admin/add-product/component/CreateProduct";
+import UploadImage from "@/app/admin/add-product/component/UploadImage";
+import ProductDetails from "@/app/admin/add-product/component/ProductDetails";
+
+
 
 export default function AddProductPage() {
     return(
@@ -21,7 +23,7 @@ export default function AddProductPage() {
                 </div>
                 <div className={'flex flex-col gap-6 w-full xl:max-w-xl'}>
                     <ProductDetails />
-                    <CreateProductButton />
+                    <AddProduct />
                 </div>
             </div>
         </div>
