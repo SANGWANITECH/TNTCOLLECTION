@@ -2,9 +2,9 @@
 
 import Inputfield from "@/components/Inputfield";
 import { useState } from "react";
-import ToggleCategory from "@/app/admin/components/ToggleCategory";
-import ToggleTargetGroup from "@/app/admin/components/ToggleTargetGroup";
 import TextareaAutosize from "react-textarea-autosize";
+import AddProductCategory from "@/app/admin/add-product/component/AddProductCategory";
+import AddProductTargetGroup from "@/app/admin/add-product/component/AddProductTargetGroup";
 
 
 export default function ProductDetails() {
@@ -13,6 +13,8 @@ export default function ProductDetails() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [availability, setAvailability] = useState("Available"); // single string now
+    const [category, setCategory] = useState("women's clothing")
+    const [targetGroup, setTargetGroup] = useState("women")
 
     return (
         <div className="card flex flex-col gap-2 w-full">
@@ -34,12 +36,18 @@ export default function ProductDetails() {
                 <div className="w-full flex gap-2">
                     <div className="w-2/3 md:w-full max-w-md">
                         <label className="text-lg">Category</label>
-                        <ToggleCategory />
+                        <AddProductCategory
+                            selectedCategory={category}
+                            onCategoryChange={setCategory}
+                        />
                     </div>
 
                     <div className="w-1/3 md:w-full max-w-md">
                         <label className="text-lg">Group</label>
-                        <ToggleTargetGroup />
+                        <AddProductTargetGroup
+                            selectedTargetGroup={targetGroup}
+                            onTargetGroupChange={setTargetGroup}
+                        />
                     </div>
                 </div>
 
