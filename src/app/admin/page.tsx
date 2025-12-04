@@ -13,7 +13,6 @@ export default async function AdminDashboardPage() {
         return <div>Error loading products</div>;
     }
 
-    console.log(products);
 
     return (
         <div>
