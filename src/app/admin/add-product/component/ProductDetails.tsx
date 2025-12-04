@@ -5,16 +5,11 @@ import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import AddProductCategory from "@/app/admin/add-product/component/AddProductCategory";
 import AddProductTargetGroup from "@/app/admin/add-product/component/AddProductTargetGroup";
+import { useAddProduct } from "@/app/admin/add-product/context/AddProductContext";
 
 
 export default function ProductDetails() {
-    const [products, setProducts] = useState([]);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [availability, setAvailability] = useState("Available"); // single string now
-    const [category, setCategory] = useState("women's clothing")
-    const [targetGroup, setTargetGroup] = useState("women")
+    const { selectedCategory, setSelectedCategory, selectedTargetGroup, setSelectedTargetGroup, setAvailability, availability, setName, setPrice, setDescription, price, name, description} = useAddProduct();
 
     return (
         <div className="card flex flex-col gap-2 w-full">
@@ -37,16 +32,16 @@ export default function ProductDetails() {
                     <div className="w-2/3 md:w-full max-w-md">
                         <label className="text-lg">Category</label>
                         <AddProductCategory
-                            selectedCategory={category}
-                            onCategoryChange={setCategory}
+                            selectedCategory={selectedCategory}
+                            onCategoryChange={setSelectedCategory}
                         />
                     </div>
 
                     <div className="w-1/3 md:w-full max-w-md">
                         <label className="text-lg">Group</label>
                         <AddProductTargetGroup
-                            selectedTargetGroup={targetGroup}
-                            onTargetGroupChange={setTargetGroup}
+                            selectedTargetGroup={selectedTargetGroup}
+                            onTargetGroupChange={setSelectedTargetGroup}
                         />
                     </div>
                 </div>
@@ -79,10 +74,9 @@ export default function ProductDetails() {
                                     <input
                                         type="radio"
                                         name="availability"
-                                        value="Available"
-                                        checked={availability === "Available"}
-                                        className={'text-xs'}
-                                        onChange={(e) => setAvailability(e.target.value)}
+                                        value="available"
+                                        checked={availability} // true means Available
+                                        onChange={() => setAvailability(true)}
                                     />
                                     Available
                                 </label>
@@ -92,10 +86,9 @@ export default function ProductDetails() {
                                     <input
                                         type="radio"
                                         name="availability"
-                                        value="Sold Out"
-                                        checked={availability === "Sold Out"}
-                                        className={'text-xs'}
-                                        onChange={(e) => setAvailability(e.target.value)}
+                                        value="sold-out"
+                                        checked={!availability} // false means Sold Out
+                                        onChange={() => setAvailability(false)}
                                     />
                                     Sold Out
                                 </label>

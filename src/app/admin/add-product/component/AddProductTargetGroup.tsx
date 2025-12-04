@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ChevronDown, ChevronUp, User, Check } from "lucide-react"
 
+
 // Static target groups
 const STATIC_TARGET_GROUPS = [
     { id: "kids", label: "Kids" },
@@ -18,6 +19,7 @@ interface Props {
 
 export default function AddProductTargetGroup({ selectedTargetGroup, onTargetGroupChange }: Props) {
     const [open, setOpen] = useState(false)
+
 
     return (
         <div className="card w-full p-2 rounded-xl relative">
