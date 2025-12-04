@@ -11,8 +11,8 @@ interface AddProductContextType {
     setName: (name: string) => void;
     description: string;
     setDescription: (desc: string) => void;
-    price: number;
-    setPrice: (price: number) => void;
+    price: string;
+    setPrice: (price: string) => void;
     imageUrl: string;
     setImageUrl: (url: string) => void;
     availability: boolean;

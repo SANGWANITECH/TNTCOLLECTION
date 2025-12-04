@@ -2,17 +2,21 @@
 
 import { useState, useRef } from 'react'
 import { CloudUpload } from 'lucide-react';
+import { useAddProduct } from "@/app/admin/add-product/context/AddProductContext";
 
 export default function UploadImage() {
     const [image, setImage] = useState<string | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const { setImageUrl } = useAddProduct()
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
             const reader = new FileReader()
             reader.onloadend = () => {
-                setImage(reader.result as string)
+                const base64 = reader.result as string
+                setImageUrl(base64) // save Base64 to context
+                setImage(base64)
             }
             reader.readAsDataURL(file)
         }
