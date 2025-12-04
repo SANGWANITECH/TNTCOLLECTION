@@ -5,7 +5,13 @@ import { ChevronDown, ChevronUp, Layers } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCategories } from "@/app/admin/hooks/useCategories";
 
-export default function ToggleCategory() {
+
+
+type Props = {
+    isAll: boolean,
+}
+
+export default function ToggleCategory({ isAll }: Props) {
     const { tabs, selectedCategory, setSelectedCategory } = useCategories()
     const [open, setOpen] = useState(false)
 

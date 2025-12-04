@@ -1,5 +1,5 @@
-// app/admin/layout.tsx
 import React from "react";
+import {AddProductProvider} from "@/app/admin/add-product/context/AddProductProvider";
 
 export default function AdminLayout({
                                         children,
@@ -7,13 +7,13 @@ export default function AdminLayout({
     children: React.ReactNode;
 }) {
     return (
-                <div >
+                <AddProductProvider >
                     {/* Main content */}
                     <div>
                         <main >
                             {children}
                         </main>
                     </div>
-                </div>
+                </AddProductProvider>
     );
 }
