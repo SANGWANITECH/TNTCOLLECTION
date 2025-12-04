@@ -1,9 +1,20 @@
-export default async function AdminDashboardPage() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fetchproducts`);
+// Import the server Supabase client
+import { supabaseServer } from "@/utils/supabase/supabase-server";
 
-    const products = await res.json();
+export default async function AdminDashboardPage() {
+    const supabase = supabaseServer();
+    const { data: products, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("id", { ascending: true });
+
+    if (error) {
+        console.error(error);
+        return <div>Error loading products</div>;
+    }
 
     console.log(products);
+
     return (
         <div>
             Admin Dashboard Page
