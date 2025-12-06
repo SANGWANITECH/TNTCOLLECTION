@@ -93,7 +93,7 @@ const Hero: NextPage = () => {
               hover:bg-white/20 hover:text-white hover:scale-110 
               transition-all duration-300 ease-out shadow-lg
             ">
-              View Categories
+              Contact us
             </Button>
           </Link>
         </div>

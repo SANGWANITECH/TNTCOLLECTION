@@ -22,7 +22,8 @@ const ProductCard = ({ product }: Props) => {
   return (
     <div
       key={product.id}
-      className="flex flex-col gap-2 p-4 border border-border-light dark:border-border-dark rounded-2xl w-full sm:max-w-[250px] hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+     className="flex flex-col gap-2 p-4 border border-border-light dark:border-border-dark rounded-2xl w-full sm:w-[48%] lg:w-[90%] hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+
     >
       {/* IMAGE SECTION */}
       <div className="relative aspect-square rounded-xl overflow-hidden group">
