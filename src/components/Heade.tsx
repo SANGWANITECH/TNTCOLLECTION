@@ -122,7 +122,7 @@ const Header = () => {
               className="text-foreground/80 hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Categories
+              Contact
             </Link>
           </nav>
 
