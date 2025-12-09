@@ -1,13 +1,22 @@
-// app/admin/page.tsx
-import {productsData} from "@/app/admin/lib/products";
+// Import the server Supabase client
+import { supabaseServer } from "@/utils/supabase/supabase-server";
 
+export default async function AdminDashboardPage() {
+    const supabase = supabaseServer();
+    const { data: products, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("id", { ascending: true });
 
-export default function AdminPage() {
-   const product = productsData[0];
+    if (error) {
+        console.error(error);
+        return <div>Error loading products</div>;
+    }
+
 
     return (
         <div>
-            {product.name}
+            Admin Dashboard Page
         </div>
     );
 }

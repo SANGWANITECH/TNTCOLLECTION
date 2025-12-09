@@ -2,6 +2,8 @@
   <dictionary name="project">
     <words>
       <w>phiri</w>
+      <w>fetchproducts</w>
+      <w>inputfield</w>
       <w>supabase</w>
     </words>
   </dictionary>
