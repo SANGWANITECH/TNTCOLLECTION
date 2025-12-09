@@ -32,7 +32,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
-            <ThemeProvider
+      <CartProvider>
+                      <ThemeProvider
               attribute="class"
               defaultTheme="system"
               enableSystem
@@ -42,6 +43,7 @@ export default function RootLayout({
                 {children}
               </div>
             </ThemeProvider>
+      </CartProvider>
       </body>
     </html>
   );
