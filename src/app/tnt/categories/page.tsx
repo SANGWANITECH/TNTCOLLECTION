@@ -47,7 +47,7 @@ export default function ContactPage() {
           <div className="space-y-4 text-lg">
             <div className="flex items-center gap-3">
               <Phone className="text-yellow-500" />
-             <a href="tell: +265999868160">+265 999 868 160</a> 
+             <a href="/">+265 999 868 160</a>
             </div>
 
             <div className="flex items-center gap-3">
