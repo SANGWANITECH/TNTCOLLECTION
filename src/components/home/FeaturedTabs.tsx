@@ -6,11 +6,13 @@ import ProductCard from "../ProductCard";
 
 interface Product {
     id: number;
-    title: string;
-    price: number;
+    name: string;
     image: string;
     category: string;
+    price: number;
+    is_available: boolean;
     description: string;
+    targetGroup: string;
 }
 
 interface TabData {
@@ -21,21 +23,19 @@ interface Props {
     tabData: TabData;
 }
 
-const tabs = [
-    { id: "all", label: "All" },
-    { id: "men", label: "Men clothes" },
-    { id: "women", label: "Women clothes" },
-    { id: "electronics", label: "Footwear" },
-    { id: "bags", label: "Bags" },
-    { id: "kids clothes", label: "Kids clothes" },
-    { id: "fashion & accessories", label: "Fashion & Accessories" },
-];
-
 const FeaturedTabs: React.FC<Props> = ({ tabData }) => {
     const [activeTab, setActiveTab] = useState<string>("all");
     const [dropDown, setDropDown] = useState<boolean>(true);
 
     const products = tabData[activeTab] ?? [];
+
+    // Auto-generate tabs from tabData keys
+    const tabs = Object.keys(tabData).map(key => ({
+        id: key,
+        label: key === 'all'
+            ? 'All'
+            : key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) // format nicely
+    }));
 
     return (
         <div className="flex flex-col lg:flex-row lg:justify-center gap-2 m-auto">
@@ -66,8 +66,8 @@ const FeaturedTabs: React.FC<Props> = ({ tabData }) => {
                                     {tab.label}
                                     {activeTab === tab.id && (
                                         <span className="m-2 p-1 rounded-md bg-background-color text-text-primary dark:bg-background-color-dark dark:text-text-secondary">
-                                          Active
-                                        </span>
+                      Active
+                    </span>
                                     )}
                                 </Button>
                             ))}
@@ -78,12 +78,10 @@ const FeaturedTabs: React.FC<Props> = ({ tabData }) => {
 
             {/* Product Grid */}
             <div className="flex-1 mx-2">
-                <div className="grid gap-2 sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+                <div className="grid gap-4 sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] w-full">
                     {products.length > 0 ? (
                         products.map((product) => (
-                            <div key={product.id}>
-                                <ProductCard product={product} />
-                            </div>
+                            <ProductCard key={product.id} product={product} />
                         ))
                     ) : (
                         <div className="flex flex-col items-center justify-center p-6 border rounded-xl text-center text-gray-500 dark:text-gray-400">
