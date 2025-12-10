@@ -17,7 +17,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     alt={product.name || 'product image'}
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 250px"
-                    style={{ objectFit: "contain" }}
+                    style={{ objectFit: "cover" }}
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAH0lEQVR42mP8/5+hP6VQwMDA8J+FhwMDgYGjAwAIHhCqZ8b2swAAAABJRU5ErkJggg=="
                     className="transition-transform duration-300 group-hover:scale-105"
