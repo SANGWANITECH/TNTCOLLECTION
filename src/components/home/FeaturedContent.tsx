@@ -1,24 +1,48 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+"use client";
 
+import { useEffect, useState } from "react";
 import FeaturedTabs from "./FeaturedTabs";
-import { supabaseServer } from '@/utils/supabase/supabase-server';
 import { FrontendProduct } from "@/app/tnt/types/frontendProduct";
+import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 
-export default async function FeaturedContent() {
-    const supabase = supabaseServer();
+export default function FeaturedContent() {
+    const [products, setProducts] = useState<FrontendProduct[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    const { data, error } = await supabase
-        .from('products')
-        .select('*');
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                const res = await fetch("/api/fetchproducts");
+                const data = await res.json();
+                setProducts(data);
+            } catch (err) {
+                console.error("Error fetching products:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
 
-    if (error) throw new Error(error.message);
+        fetchProducts();
+    }, []);
 
-    const products = data as FrontendProduct[];
+    if (loading) {
+        // Show 6 skeleton cards while loading
+        const skeletons = Array.from({ length: 6 }).map((_, i) => <ProductCardSkeleton key={i} />);
+        return <div className="grid gap-4 sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">{skeletons}</div>;
+    }
+
+    if (!products.length) {
+        return (
+            <div className="flex flex-col items-center justify-center p-6 border rounded-xl text-center text-gray-500 dark:text-gray-400">
+                <p className="text-lg font-semibold">No products found</p>
+                <p className="text-sm">Please try another category.</p>
+            </div>
+        );
+    }
 
     const tabData: Record<string, FrontendProduct[]> = { all: [...products] };
     products.forEach((product) => {
-        const key = product.category.toLowerCase().replace(/\s+/g, '_');
+        const key = product.category.toLowerCase().replace(/\s+/g, "_");
         if (!tabData[key]) tabData[key] = [];
         tabData[key].push(product);
     });
