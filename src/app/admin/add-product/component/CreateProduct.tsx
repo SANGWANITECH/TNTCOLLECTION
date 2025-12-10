@@ -36,7 +36,7 @@ export default function CreateProduct() {
         }
 
         // Convert price to number
-        const numericPrice = parseFloat(price);
+        const numericPrice = parseFloat(price.replace(/,/g, ""));
 
         // Validate that price is a valid number
         if (isNaN(numericPrice)) {
