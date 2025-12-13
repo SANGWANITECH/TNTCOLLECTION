@@ -1,14 +1,35 @@
+// app/admin/components/ProductCard.tsx
 'use client'
 
 import Image from "next/image";
-import { EllipsisVertical } from 'lucide-react';
-import {Product} from "@/app/admin/types/product";
+import { Product } from "@/app/admin/types/product";
+import ProductPopup from "@/app/admin/components/Actions";
+import { useRouter } from "next/navigation";
+
 
 type ProductCardProps = {
     product: Product;
+    onEdit: (productId: number) => void;
+    onDelete: (productId: number) => void;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
+    const router = useRouter();
+    // Example edit and delete handlers if parent doesn't provide them
+    const handleEdit = (productId: number) => {
+        console.log('Edit product:', productId);
+        // Add your edit logic here
+        onEdit(productId);
+    };
+
+    const handleDelete = (productId: number) => {
+        console.log('Delete product:', productId);
+        // Add confirmation dialog here
+        if (confirm('Are you sure you want to delete this product?')) {
+            onDelete(productId);
+        }
+    };
+
     return (
         <div className="card p-2 flex flex-col gap-4 w-full max-w-sm mx-auto">
             <div className="relative aspect-square rounded-md overflow-hidden group">
@@ -24,7 +45,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 />
 
                 <div
-                    className={`absolute text-white bottom-2 left-2 text-xs font-medium px-2 py-1 rounded-full bg-background-color-dark/40  backdrop-blur-sm`}
+                    className={`absolute text-white bottom-2 left-2 text-xs font-medium px-2 py-1 rounded-full bg-background-color-dark/40 backdrop-blur-sm`}
                 >
                     {product.target_group}
                 </div>
@@ -41,12 +62,16 @@ export default function ProductCard({ product }: ProductCardProps) {
                     </p>
                 </div>
 
-                <div className={'flex items-center justify-between mt-4'}>
-                    <p className={'text-sm text-gray-600 dark:text-text-secondary'}>{product.category}</p>
-                    <EllipsisVertical className={'w-5 h-5'}/>
-                </div>
+                {/* Pass the product and handlers correctly */}
+                <ProductPopup
+                    product={product}
+                    onDeleted={(id) => {
+                        console.log("Deleted product:", id);
+                        router.refresh();
+                        // remove from state OR trigger router.refresh()
+                    }}
+                />
             </div>
-
         </div>
     );
 }
