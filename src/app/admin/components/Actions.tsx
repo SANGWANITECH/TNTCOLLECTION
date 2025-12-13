@@ -61,11 +61,11 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
             {isOpen && (
                 <div
                     ref={popupRef}
-                    className="absolute right-0 top-full mt-1 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border z-10"
+                    className="card absolute right-0 top--10 bottom-5 mt-1 w-48 shadow-lg border z-10"
                 >
                     <Link
                         href={`/admin/products/edit-product/${product.id}`}
-                        className="block px-4 py-2 text-sm hover:bg-gray-100"
+                        className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
                         onClick={() => setIsOpen(false)}
                     >
                         Edit
@@ -74,7 +74,7 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
                     <button
                         onClick={handleDelete}
                         disabled={isPending}
-                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 disabled:opacity-50"
+                        className="w-full text-left px-4 py-2 text-sm cursor-pointer text-red-600 hover:text-white hover:bg-red-500 rounded-sm  disabled:opacity-50"
                     >
                         {isPending ? 'Deleting…' : 'Delete'}
                     </button>
