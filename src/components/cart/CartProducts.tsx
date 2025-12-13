@@ -46,7 +46,7 @@ const CartProducts: NextPage = () => {
                         {/* 1st section: Image */}
                         <div className="relative w-full max-w-[50px] h-[60px]">
                             <Image 
-                            src={cartItem.image}
+                            src={ `https://ovapnnyjvmiqnoqgdarc.supabase.co/storage/v1/object/public/products/${cartItem.image}`}
                             alt={cartItem.title}
                             fill
                             />

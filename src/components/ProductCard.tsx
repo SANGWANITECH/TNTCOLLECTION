@@ -29,7 +29,7 @@ const ProductCard = ({ product }: Props) => {
       {/* IMAGE SECTION */}
       <div className="relative aspect-square rounded-xl overflow-hidden group">
         <Image
-          src={product.image}
+          src={ `https://ovapnnyjvmiqnoqgdarc.supabase.co/storage/v1/object/public/products/${product.image}`}
           alt={product.name ||'product name'}
           fill
           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 250px"

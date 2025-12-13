@@ -16,7 +16,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="card p-2 flex flex-col gap-4 w-full max-w-sm mx-auto">
             <div className="relative aspect-square rounded-md overflow-hidden group">
                 <Image
-                    src={product.image}
+                    src={ `https://ovapnnyjvmiqnoqgdarc.supabase.co/storage/v1/object/public/products/${product.image}`}
                     alt={product.name || 'product image'}
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 250px"
