@@ -1,4 +1,3 @@
-// app/admin/components/Actions.tsx
 'use client'
 
 import { useState, useRef, useEffect, useTransition } from 'react';
@@ -6,6 +5,8 @@ import Link from 'next/link';
 import { EllipsisVertical } from 'lucide-react';
 import { Product } from "@/app/admin/types/product";
 import { deleteProduct } from "@/app/admin/actions/deleteProduct";
+import { toast } from "sonner";
+import {useRouter} from "next/navigation";
 
 interface ProductPopupProps {
     product: Product;
@@ -17,6 +18,7 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
     const [isPending, startTransition] = useTransition();
     const popupRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -38,12 +40,23 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
         if (!confirm('Are you sure you want to delete this product?')) return;
 
         startTransition(async () => {
-            await deleteProduct(product.id);
-            onDeleted?.(product.id);
+            try {
+                await deleteProduct(product.id);
+
+                // Success toast
+                toast.success("Product deleted successfully");
+
+                // Refresh the page immediately after deletion
+                router.refresh();
+            } catch (err) {
+                console.error(err);
+                toast.error("Failed to delete product");
+            }
         });
 
         setIsOpen(false);
     };
+
 
     return (
         <div className="relative">
@@ -61,11 +74,11 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
             {isOpen && (
                 <div
                     ref={popupRef}
-                    className="card absolute right-0 top--10 bottom-5 mt-1 w-48 shadow-lg border z-10"
+                    className="card absolute right-0 bottom-5 mt-1 w-48 shadow-lg border z-10"
                 >
                     <Link
                         href={`/admin/products/edit-product/${product.id}`}
-                        className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="block px-4 py-2 text-sm hover:bg-gray-100 hover:dark:bg-gray-700"
                         onClick={() => setIsOpen(false)}
                     >
                         Edit
@@ -74,9 +87,9 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
                     <button
                         onClick={handleDelete}
                         disabled={isPending}
-                        className="w-full text-left px-4 py-2 text-sm cursor-pointer text-red-600 hover:text-white hover:bg-red-500 rounded-sm  disabled:opacity-50"
+                        className="w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-red-500 hover:text-white disabled:opacity-50"
                     >
-                        {isPending ? 'Deleting…' : 'Delete'}
+                        {isPending ? "Deleting…" : "Delete"}
                     </button>
                 </div>
             )}
