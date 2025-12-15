@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import AddProduct from "@/app/admin/add-product/component/CreateProduct";
-import UploadImage from "@/app/admin/add-product/component/UploadImage";
-import ProductDetails from "@/app/admin/add-product/component/ProductDetails";
+import UploadImage from "@/app/admin/components/UploadImage";
+import ProductDetails from "@/app/admin/components/ProductDetails";
 
 
 

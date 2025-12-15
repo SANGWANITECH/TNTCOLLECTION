@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { CloudUpload } from 'lucide-react';
-import { useAddProduct } from "@/app/admin/add-product/context/AddProductContext";
+import { useAddProduct } from "@/app/admin/context/AddProductContext";
 
 export default function UploadImage() {
     const [image, setImage] = useState<string | null>(null)

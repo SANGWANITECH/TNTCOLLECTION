@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode, useState } from "react";
-import { AddProductContext } from "@/app/admin/add-product/context/AddProductContext";
+import { AddProductContext } from "@/app/admin/context/AddProductContext";
 
 export function AddProductProvider({ children }: { children: ReactNode }) {
     const [selectedCategory, setSelectedCategory] = useState<string>("women's clothing");
