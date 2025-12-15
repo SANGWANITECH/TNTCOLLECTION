@@ -11,6 +11,8 @@ interface FilterCategoryContextType {
     selectedTargetGroup: string;
     setSelectedTargetGroup: (group: string) => void;
     fetchProducts: () => Promise<void>;
+    removeProduct: (category: number) => void;
+    restoreProducts: (products: Product[]) => void;
 }
 
 export const FilterCategoryContext = createContext<FilterCategoryContextType | null>(null);

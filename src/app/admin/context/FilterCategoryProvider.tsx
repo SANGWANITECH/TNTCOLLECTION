@@ -30,11 +30,21 @@ export function FilterCategoryProvider({ children }: Props) {
         fetchProducts();
     }, [fetchProducts]);
 
+    const removeProduct = (id: number) => {
+        setProducts(prev => prev.filter(p => p.id !== id));
+    };
+
+    const restoreProducts = (products: Product[]) => {
+        setProducts(products);
+    }
+
     return (
         <FilterCategoryContext.Provider
             value={{
                 products,
                 fetchProducts,
+                removeProduct,
+                restoreProducts,
                 selectedCategory,
                 setSelectedCategory,
                 selectedTargetGroup,
