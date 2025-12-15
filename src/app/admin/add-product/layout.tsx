@@ -1,5 +1,5 @@
 import React from "react";
-import {AddProductProvider} from "@/app/admin/add-product/context/AddProductProvider";
+import {AddProductProvider} from "@/app/admin/context/AddProductProvider";
 
 export default function AdminLayout({
                                         children,
@@ -7,13 +7,10 @@ export default function AdminLayout({
     children: React.ReactNode;
 }) {
     return (
-                <AddProductProvider >
-                    {/* Main content */}
-                    <div>
-                        <main >
-                            {children}
-                        </main>
-                    </div>
-                </AddProductProvider>
+        <div>
+            <main >
+                {children}
+            </main>
+        </div>
     );
 }

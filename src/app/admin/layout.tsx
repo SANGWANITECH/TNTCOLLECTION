@@ -4,6 +4,8 @@ import AdminHeader from "./components/AdminHeader";
 import AdminSidebar from "@/app/admin/components/AdminSidebar";
 import {SidebarProvider} from "@/app/admin/context/SidebarProvider";
 import {FilterCategoryProvider} from "@/app/admin/context/FilterCategoryProvider";
+import {AddProductProvider} from "@/app/admin/context/AddProductProvider";
+
 
 
 export default function AdminLayout({
@@ -12,6 +14,7 @@ export default function AdminLayout({
     children: React.ReactNode;
 }) {
     return (
+        <AddProductProvider >
         <FilterCategoryProvider>
             <SidebarProvider >
                 <AdminHeader/>
@@ -26,5 +29,6 @@ export default function AdminLayout({
                     </div>
             </SidebarProvider>
         </FilterCategoryProvider>
+        </AddProductProvider>
     );
 }

@@ -1,11 +1,10 @@
 'use client'
 
 import Inputfield from "@/components/Inputfield";
-import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import AddProductCategory from "@/app/admin/add-product/component/AddProductCategory";
-import AddProductTargetGroup from "@/app/admin/add-product/component/AddProductTargetGroup";
-import { useAddProduct } from "@/app/admin/add-product/context/AddProductContext";
+import AddProductCategory from "@/app/admin/components/AddProductCategory";
+import AddProductTargetGroup from "@/app/admin/components/AddProductTargetGroup";
+import { useAddProduct } from "@/app/admin/context/AddProductContext";
 
 
 export default function ProductDetails() {

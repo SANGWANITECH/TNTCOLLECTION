@@ -1,6 +1,6 @@
 'use client'
 
-import { useAddProduct } from "@/app/admin/add-product/context/AddProductContext";
+import { useAddProduct } from "@/app/admin/context/AddProductContext";
 import { useFilterCategory } from "@/app/admin/context/FilterCategoryContext";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
