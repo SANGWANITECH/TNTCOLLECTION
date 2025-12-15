@@ -7,6 +7,7 @@ import { Product } from "@/app/admin/types/product";
 import { deleteProduct } from "@/app/admin/actions/deleteProduct";
 import { toast } from "sonner";
 import {useRouter} from "next/navigation";
+import {useFilterCategory} from "@/app/admin/context/FilterCategoryContext";
 
 interface ProductPopupProps {
     product: Product;
@@ -19,6 +20,7 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
     const popupRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
+    const { removeProduct, fetchProducts} = useFilterCategory();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -39,18 +41,20 @@ export default function ProductPopup({ product, onDeleted }: ProductPopupProps) 
     const handleDelete = () => {
         if (!confirm('Are you sure you want to delete this product?')) return;
 
+        // Instant UI update
+        removeProduct(product.id);
+
         startTransition(async () => {
             try {
                 await deleteProduct(product.id);
-
                 // Success toast
                 toast.success("Product deleted successfully");
 
-                // Refresh the page immediately after deletion
-                router.refresh();
             } catch (err) {
                 console.error(err);
                 toast.error("Failed to delete product");
+                // 🔁 rollback
+                await fetchProducts();
             }
         });
 
