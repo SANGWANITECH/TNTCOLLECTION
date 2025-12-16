@@ -6,26 +6,49 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { Truck, Tag } from "lucide-react";
 import { Button } from "../ui/button";
-import {useRouter} from "next/navigation";
 
 const OrderSummary: NextPage = () => {
-        const [discount, setDiscount] = useState('');
+    const [discount, setDiscount] = useState('');
+    const { cartItems, setSubtotal, shippingCost } = useCart();
 
-        const { cartItems, setSubtotal, shippingCost } = useCart();
-        const router = useRouter();
+    const subtotal = cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity, 0
+    );
 
-        const subtotal = cartItems.reduce(
-            (acc, item) => acc + item.price * item.quantity, 0
-        );
+    useEffect(() => {
+        setSubtotal(subtotal);
+    }, [subtotal, setSubtotal]);
 
-        useEffect(() => {
-            setSubtotal(subtotal);
-        }, [subtotal, setSubtotal]);
+    if(!cartItems.length) {
+        return null;
+    }
 
-        if(!cartItems.length) {
-            return null;
-        }
+    // Function to generate WhatsApp message
+    const generateWhatsAppMessage = () => {
+        let message = `Hello TNT Collection,\n\nI'd like to place an order:\n\n*Items*\n`;
 
+        // Add each cart item
+        cartItems.forEach((item, index) => {
+            const itemSubtotal = item.price * item.quantity;
+            message += `${index + 1}. ${item.title}\n`;
+            message += `   • Category: ${item.category}\n`;
+            message += `   • Price: $${item.price.toFixed(2)}\n`;
+            message += `   • Qty: ${item.quantity}\n`;
+            message += `   • Subtotal: $${itemSubtotal.toFixed(2)}\n\n`;
+        });
+
+        // Add summary
+        message += `--------------------\n`;
+        message += `*Subtotal:* $${subtotal.toFixed(2)}\n`;
+        message += `*Shipping:* $${shippingCost.toFixed(2)}\n`;
+        message += `*Total:* $${(subtotal + shippingCost).toFixed(2)}\n\n`;
+        message += `Please confirm availability and delivery`;
+
+        return encodeURIComponent(message);
+    };
+
+    // WhatsApp URL with formatted message
+    const whatsappUrl = `https://wa.me/265999868160?text=${generateWhatsAppMessage()}`;
 
     return (
         <div className={'relative w-full sm:max-w-[600px] lg:max-w-[500px] xl:max-w-[600px] mx-auto lg:mt-20'}>
@@ -71,13 +94,14 @@ const OrderSummary: NextPage = () => {
                                 Total
                                 <span>${(shippingCost + subtotal).toFixed(2)}</span>
                             </p>
-                            <Button
-                                variant={'primary'}
-                                className="text-sm"
-                                onClick={() => router.push("/tnt/cart/checkout")}
+                            <a
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block w-full text-center bg-green-500 text-black font-bold py-3 rounded-xl transition-all shadow-md hover:bg-green-600"
                             >
-                                Proceed To Checkout
-                            </Button>
+                                Order via WhatsApp
+                            </a>
                         </div>
                     </div>
                 </div>
