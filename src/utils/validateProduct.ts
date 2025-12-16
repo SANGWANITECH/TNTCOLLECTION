@@ -29,11 +29,9 @@ export const validateProductForm = (formData: ProductFormData): ValidationResult
     if (!formData.price.trim()) {
         errors.price = "Price is required";
     } else {
-        const numericPrice = parseFloat(formData.price);
-        if (isNaN(numericPrice)) {
+        const numericPrice = parseFloat(formData.price.replace(/,/g, ""));
+        if (isNaN(numericPrice) || numericPrice <= 0) {
             errors.price = "Price must be a valid number";
-        } else if (numericPrice <= 0) {
-            errors.price = "Price must be greater than 0";
         }
     }
 
@@ -45,18 +43,22 @@ export const validateProductForm = (formData: ProductFormData): ValidationResult
         errors.targetGroup = "Target group is required";
     }
 
-    if (!formData.imageUrl.trim()) {
-        errors.imageUrl = "Image URL is required";
+    if (!formData.imageUrl || !formData.imageUrl.trim()) {
+        errors.imageUrl = "Product image is required";
     } else {
-        try {
-            new URL(formData.imageUrl);
-        } catch {
-            errors.imageUrl = "Please enter a valid image URL";
+        const isBase64 = formData.imageUrl.startsWith("data:image/");
+        const isFilename = /^[^\/]+\.(png|jpg|jpeg|webp)$/i.test(formData.imageUrl);
+
+        if (!isBase64 && !isFilename) {
+            errors.imageUrl = "Invalid image format";
         }
     }
 
     const isValid = Object.keys(errors).length === 0;
-    const message = isValid ? "" : "All field is required";
 
-    return { isValid, errors, message };
+    return {
+        isValid,
+        errors,
+        message: isValid ? "" : "All fields are required",
+    };
 };
