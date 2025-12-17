@@ -39,13 +39,34 @@ const OrderSummary: NextPage = () => {
 
         // Add summary
         message += `--------------------\n`;
-        message += `*Subtotal:* $${subtotal.toFixed(2)}\n`;
-        message += `*Shipping:* $${shippingCost.toFixed(2)}\n`;
-        message += `*Total:* $${(subtotal + shippingCost).toFixed(2)}\n\n`;
+        message += `*Total:* $${subtotal.toFixed(2)}\n`;
         message += `Please confirm availability and delivery`;
 
         return encodeURIComponent(message);
     };
+
+    const handleOrderViaWhatsApp = async () => {
+        try {
+            const res = await fetch("/api/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cartItems }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error);
+            }
+
+            // Optional: include order ID in WhatsApp message
+            window.open(whatsappUrl + `%0A%0AOrder Ref: #${data.orderId}`, "_blank");
+
+        } catch (err) {
+            alert("Failed to place order. Please try again.");
+        }
+    };
+
 
     // WhatsApp URL with formatted message
     const whatsappUrl = `https://wa.me/265999868160?text=${generateWhatsAppMessage()}`;
@@ -94,14 +115,13 @@ const OrderSummary: NextPage = () => {
                                 Total
                                 <span>${(shippingCost + subtotal).toFixed(2)}</span>
                             </p>
-                            <a
-                                href={whatsappUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                onClick={handleOrderViaWhatsApp}
                                 className="block w-full text-center bg-green-500 text-black font-bold py-3 rounded-xl transition-all shadow-md hover:bg-green-600"
                             >
-                                Order via WhatsApp
-                            </a>
+                                Continue on WhatsApp
+                            </button>
+
                         </div>
                     </div>
                 </div>
