@@ -14,6 +14,6 @@ export interface Order {
     id: number;
     products: OrderProduct[];
     status: OrderStatus;
-    created_at: string;
+    order_date: string;
     admin_id: string | null;
 }
