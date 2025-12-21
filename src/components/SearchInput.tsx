@@ -50,16 +50,35 @@ export default function SearchInput() {
         return () => clearTimeout(debounce)
     }, [query])
 
-    const handleSearch = (e?: React.FormEvent) => {
-        e?.preventDefault()
-        if (!query.trim()) return
-        setShowDropdown(false)
-        router.push(`/tnt/search?q=${encodeURIComponent(query)}`)
-    }
+    const handleSearch = (searchQuery?: string) => {
+        const searchTerm = searchQuery || query;
+        if (!searchTerm.trim()) return;
+        setShowDropdown(false);
+
+        // Update input field if a specific query is provided
+        if (searchQuery) {
+            setQuery(searchQuery);
+        }
+
+        // Small delay to show the input update before navigation
+        setTimeout(() => {
+            const encodedQuery = encodeURIComponent(searchTerm.trim().toLowerCase());
+            router.push(`/tnt/search/${encodedQuery}`);
+        }, 100);
+    };
+
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        handleSearch();
+    };
+
+    const handleSuggestionClick = (suggestionName: string) => {
+        handleSearch(suggestionName);
+    };
 
     return (
         <div className="relative w-full" ref={dropdownRef}>
-            <form onSubmit={handleSearch} className="relative">
+            <form onSubmit={handleFormSubmit} className="relative">
                 <input
                     type="text"
                     value={query}
@@ -78,10 +97,8 @@ export default function SearchInput() {
                     {suggestions.map((item) => (
                         <button
                             key={item.id}
-                            onClick={() => {
-                                router.push(`/tnt/search`)
-                                setShowDropdown(false)
-                            }}
+                            type="button"
+                            onClick={() => handleSuggestionClick(item.name)}
                             className="w-full text-left px-4 py-3 hover:bg-accent/10 flex justify-between items-center border-b last:border-0 border-border-light dark:border-border-dark"
                         >
                             <span className="text-sm font-medium truncate">{item.name}</span>
@@ -89,6 +106,7 @@ export default function SearchInput() {
                         </button>
                     ))}
                     <button
+                        type="button"
                         onClick={() => handleSearch()}
                         className="w-full py-2 bg-accent/5 text-accent text-xs font-semibold hover:bg-accent/10"
                     >
