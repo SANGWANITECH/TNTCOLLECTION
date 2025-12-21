@@ -4,6 +4,7 @@ import InputField from "@/components/Inputfield";
 import React, {FormEvent, useState} from "react";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
+import {createClient} from "@/utils/supabase/client";
 
 
 const LoginForm: NextPage = () => {
@@ -36,6 +37,21 @@ const LoginForm: NextPage = () => {
         router.push(`/tnt/auth/verify?email=${encodeURIComponent(email)}`);
     }
 
+    const signInWithGoogle = async () => {
+        const supabase = createClient(); // Use your browser client creator
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                // This is the URL Google will redirect back to
+                redirectTo: `${window.location.origin}/tnt/auth/callback`,
+            },
+        });
+
+        if (error) {
+            console.error("Auth error:", error.message);
+        }
+    };
+
     return (
             <form onSubmit={requestOTP} className={'card w-full max-w-xl mx-auto'}>
                 <div className={'flex flex-col text-start gap-1 mb-4'}>
@@ -66,7 +82,10 @@ const LoginForm: NextPage = () => {
                 </div>
 
                 <div className={'flex justify-center'}>
-                    <Button className="flex items-center gap-2 border border-border-light dark:border-border-dark w-full sm:w-fit">
+                    <Button
+                        type={'button'}
+                        onClick={signInWithGoogle}
+                        className="flex items-center gap-2 border border-border-light dark:border-border-dark w-full sm:w-fit">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 48 48"
