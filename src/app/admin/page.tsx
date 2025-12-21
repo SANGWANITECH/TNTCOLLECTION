@@ -30,7 +30,15 @@ function MetricCard({ title, value, icon, iconBgColor }: MetricCardProps) {
     );
 }
 
-export default async function AdminDashboardPage() {
+function StatRow({ label, value }: { label: string; value: number }) {
+    return (
+        <div className="flex items-center justify-between py-2 border-b border-[#2a2a2a]">
+            <p className="text-[#888] text-[12px]">{label}</p>
+            <p className="dark:text-white text-[12px]">{value}</p>
+        </div>
+    );
+}
+    export default async function AdminDashboardPage() {
     // Mock data - will be replaced with real Supabase data
     const metrics = {
         orders: 24,
@@ -41,16 +49,42 @@ export default async function AdminDashboardPage() {
     };
 
     const supabase = supabaseServer();
-    const { data: products, error } = await supabase
+
+    // 1. Fetch Total Products Count
+    const { count: productsCount, error: productsError } = await supabase
         .from("products")
-        .select("*")
-        .order("id", { ascending: true });
+        .select("*", { count: 'exact', head: true });
 
-    if (error) {
-        console.error(error);
-        return <div>Error loading products</div>;
+    // 2. Fetch Total Orders Count
+    const { count: ordersCount, error: ordersError } = await supabase
+        .from("orders")
+        .select("*", { count: 'exact', head: true });
+
+    // 3. Fetch Specific Order Stats (Quick Stats)
+    const { count: pendingCount } = await supabase
+        .from("orders")
+        .select("*", { count: 'exact', head: true })
+        .eq("status", "pending");
+
+    const { count: soldCount } = await supabase
+        .from("orders")
+        .select("*", { count: 'exact', head: true })
+        .eq("status", "sold");
+
+    const { count: cancelledCount } = await supabase
+        .from("orders")
+        .select("*", { count: 'exact', head: true })
+        .eq("status", "cancelled");
+
+    // 4. Fetch Total Admins
+    const { count: adminsCount } = await supabase
+        .from("admins") // or your users table
+        .select("*", { count: 'exact', head: true });
+
+    if (productsError || ordersError) {
+        console.error(productsError || ordersError);
+        return <div>Error loading metrics</div>;
     }
-
 
 
     return (
@@ -65,13 +99,13 @@ export default async function AdminDashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <MetricCard
                     title="Total Orders"
-                    value={metrics.orders}
+                    value={ordersCount ?? 0}
                     icon={<ShoppingCart className="w-5 h-5 text-white" />}
                     iconBgColor="bg-[#4b8e47]"
                 />
                 <MetricCard
                     title="Total Products"
-                    value={metrics.products}
+                    value={productsCount ?? 0}
                     icon={<Package className="w-5 h-5 text-white" />}
                     iconBgColor="bg-[#3b85f4]"
                 />
@@ -83,7 +117,7 @@ export default async function AdminDashboardPage() {
                 />
                 <MetricCard
                     title="Total Admins"
-                    value={metrics.admins}
+                    value={adminsCount ?? 0}
                     icon={<Users className="w-5 h-5 text-white" />}
                     iconBgColor="bg-[#f59e0b]"
                 />
@@ -94,36 +128,12 @@ export default async function AdminDashboardPage() {
                     iconBgColor="bg-[#6b7280]"
                 />
             </div>
-            {/* Additional Info Section */}
             <div className="mt-6 bg-gray-300 dark:bg-[#0a0a0a] dark:border dark:border-[#2a2a2a] rounded-[5px] p-5">
-                <h2 className="dark:text-white font-['Inter:Semi_Bold',sans-serif] font-semibold text-[16px] mb-3">
-                    Quick Stats
-                </h2>
+                <h2 className="...">Quick Stats</h2>
                 <div className="space-y-2">
-                    <div className="flex items-center justify-between py-2 border-b border-[#2a2a2a]">
-                        <p className="text-[#888] font-['Inter:Regular',sans-serif] text-[12px]">
-                            Pending Orders
-                        </p>
-                        <p className="dark:text-white font-['Inter:Medium',sans-serif] text-[12px]">
-                            12
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-between py-2 border-b border-[#2a2a2a]">
-                        <p className="text-[#888] font-['Inter:Regular',sans-serif] text-[12px]">
-                            Completed Orders
-                        </p>
-                        <p className="dark:text-white font-['Inter:Medium',sans-serif] text-[12px]">
-                            10
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-between py-2">
-                        <p className="text-[#888] font-['Inter:Regular',sans-serif] text-[12px]">
-                            Cancelled Orders
-                        </p>
-                        <p className="dark:text-white font-['Inter:Medium',sans-serif] text-[12px]">
-                            2
-                        </p>
-                    </div>
+                    <StatRow label="Pending Orders" value={pendingCount ?? 0} />
+                    <StatRow label="Completed Orders" value={soldCount ?? 0} />
+                    <StatRow label="Cancelled Orders" value={cancelledCount ?? 0} />
                 </div>
             </div>
         </div>
