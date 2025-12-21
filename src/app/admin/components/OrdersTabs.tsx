@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Order, OrderStatus } from "@/app/admin/types/order";
 import Image from "next/image";
 import MarkAsSoldButton from "@/app/admin/components/MarkAsSoldButton";
+import CancelOrderButton from "@/app/admin/components/CancelOrderButton";
 
 const TABS: { label: string; value: OrderStatus | "all" }[] = [
     { label: "All Orders", value: "all" },
@@ -32,7 +33,14 @@ export default function OrdersTabs({ orders }: { orders: Order[] }) {
         });
     };
 
-    //mark as sold
+    const getStatusColor = (status: OrderStatus) => {
+        switch(status) {
+            case 'sold': return 'bg-[#4b8e47]';
+            case 'cancelled': return 'bg-red-500';
+            case 'pending': return 'bg-yellow-400';
+            default: return 'bg-yellow-400';
+        }
+    };
 
 
     return (
@@ -72,7 +80,7 @@ export default function OrdersTabs({ orders }: { orders: Order[] }) {
                                     <p className="text-xs">{formatDate(order.order_date)}</p>
                                 </div>
                                 <div>
-                                    <p className="text-white bg-yellow-400 rounded-lg py-1 px-2 w-fit">
+                                    <p className={`text-white ${getStatusColor(order.status)} rounded-lg py-1 px-2 w-fit`}>
                                         {order.status}
                                     </p>
                                 </div>
@@ -130,9 +138,7 @@ export default function OrdersTabs({ orders }: { orders: Order[] }) {
                                 <div className="flex gap-2 mt-4">
                                     <MarkAsSoldButton orderId={order.id} />
 
-                                    <button className="flex-1 bg-[#ff383c] hover:bg-[#ff4a4e] transition-colors rounded-[5px] py-2">
-                                        Cancel Order
-                                    </button>
+                                    <CancelOrderButton orderId={order.id} />
                                 </div>
                             )}
 
