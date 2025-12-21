@@ -1,25 +1,23 @@
 import { createClient } from "@/utils/supabase/server";
-import OrdersTabs from "@/app/admin/components/OrdersTabs";
+import OrdersClient from "@/app/admin/components/OrdersRealtime";
+import {getUser} from "@/utils/supabase/auth";
 
 export default async function OrdersPage() {
-
     const supabase = await createClient();
 
-    const { data:orders, error:fetchError } = await supabase
+    const { data: orders, error } = await supabase
         .from("orders")
-        .select('*')
+        .select("*")
+        .order("order_date", { ascending: false });
 
-    if(fetchError){
-        throw fetchError;
-    }
+    if (error) throw error;
 
-    if(!orders){
-        return <p>No orders found.</p>;
-    }
+    const user = await getUser();
+    const userId = user?.id;
 
     return (
-        <div className={'pb-10 pt-2'}>
-            <OrdersTabs orders={orders} />
+        <div className="pb-10 pt-2">
+            <OrdersClient initialOrders={orders ?? []} />
         </div>
-    )
+    );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Order, OrderStatus } from "@/app/admin/types/order";
 import Image from "next/image";
+import MarkAsSoldButton from "@/app/admin/components/MarkAsSoldButton";
 
 const TABS: { label: string; value: OrderStatus | "all" }[] = [
     { label: "All Orders", value: "all" },
@@ -30,6 +31,9 @@ export default function OrdersTabs({ orders }: { orders: Order[] }) {
             minute: '2-digit'
         });
     };
+
+    //mark as sold
+
 
     return (
         <div className="space-y-4 px-4 py-6 max-w-[800px] mx-auto">
@@ -122,18 +126,16 @@ export default function OrdersTabs({ orders }: { orders: Order[] }) {
                                 </p>
                             </div>
                             {/* Action Buttons */}
-                            <div className="flex gap-2 mt-4">
-                                <button className="flex-1 bg-[#4b8e47] hover:bg-[#5a9d56] cursor-pointer transition-colors rounded-[5px] py-2">
-                                    <p className="text-white font-['Inter:Medium',sans-serif] text-[11px]">
-                                        Mark as Sold
-                                    </p>
-                                </button>
-                                <button className="flex-1 bg-[#ff383c] hover:bg-[#ff4a4e] cursor-pointer transition-colors rounded-[5px] py-2">
-                                    <p className="text-white font-['Inter:Medium',sans-serif] text-[11px]">
+                            {order.status === "pending" && (
+                                <div className="flex gap-2 mt-4">
+                                    <MarkAsSoldButton orderId={order.id} />
+
+                                    <button className="flex-1 bg-[#ff383c] hover:bg-[#ff4a4e] transition-colors rounded-[5px] py-2">
                                         Cancel Order
-                                    </p>
-                                </button>
-                            </div>
+                                    </button>
+                                </div>
+                            )}
+
                         </div>
                     );
                 })}
