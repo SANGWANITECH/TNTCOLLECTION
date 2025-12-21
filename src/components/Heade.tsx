@@ -8,6 +8,7 @@ import HeaderTabs from "./HeaderTabs";
 import UserStatusIndicator from "./UserStatusIndicator";
 import CartNotificatiion from "./CartNotification";
 import {usePathname} from "next/navigation";
+import SearchInput from "@/components/SearchInput";
 
 
 const Header = () => {
@@ -47,13 +48,9 @@ const Header = () => {
         </div>
 
         {/* SEARCH (DESKTOP) */}
-        <div className="hidden lg:block max-w-xs w-full mx-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full px-3 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-          />
-        </div>
+          <div className="hidden lg:block max-w-xs w-full mx-4">
+              <SearchInput />
+          </div>
 
         {/* RIGHT ACTIONS + MOBILE MENU */}
         <div className="flex gap-4 sm:gap-6 items-center">
@@ -126,13 +123,9 @@ const Header = () => {
             </Link>
           </nav>
 
-          <div className="pt-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full px-3 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-            />
-          </div>
+            <div className="pt-4">
+                <SearchInput />
+            </div>
 
           <div className="text-sm text-foreground/60">
             <p>Premium Streetwear • Limited Drops</p>
