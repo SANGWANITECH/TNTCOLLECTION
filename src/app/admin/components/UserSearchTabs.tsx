@@ -10,6 +10,9 @@ type SearchQuery = {
     created_at: string;
 };
 
+type TimeFilter = "today" | "week" | "month" | "all";
+
+
 const PAGE_SIZE = 20;
 
 export default function UserSearchTabs() {
@@ -18,6 +21,7 @@ export default function UserSearchTabs() {
     const [page, setPage] = useState(1);
     const [data, setData] = useState<SearchQuery[]>([]);
     const [loading, setLoading] = useState(false);
+    const [filter, setFilter] = useState<TimeFilter>("today");
 
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
@@ -26,11 +30,18 @@ export default function UserSearchTabs() {
         const fetchSearches = async () => {
             setLoading(true);
 
-            const { data, error } = await supabase
+            let query = supabase
                 .from("search_queries")
                 .select("*")
-                .order("created_at", { ascending: false })
-                .range(from, to);
+                .order("created_at", { ascending: false });
+
+            const fromDate = getFromDate(filter);
+
+            if (fromDate) {
+                query = query.gte("created_at", fromDate.toISOString());
+            }
+
+            const { data, error } = await query.range(from, to);
 
             if (!error) {
                 setData(data ?? []);
@@ -40,7 +51,34 @@ export default function UserSearchTabs() {
         };
 
         fetchSearches();
-    }, [page]);
+    }, [page, filter]);
+
+
+    useEffect(() => {
+        setPage(1);
+    }, [filter]);
+
+
+    const getFromDate = (filter: TimeFilter) => {
+        const now = new Date();
+
+        if (filter === "today") {
+            return new Date(now.setHours(0, 0, 0, 0));
+        }
+
+        if (filter === "week") {
+            return new Date(now.setDate(now.getDate() - 7));
+        }
+
+        if (filter === "month") {
+            return new Date(now.setMonth(now.getMonth() - 1));
+        }
+
+        return null; // all time
+    };
+
+
+
     return (
         <div className="card p-4">
             <h2 className="font-semibold mb-4">Recent Searches</h2>
@@ -51,6 +89,28 @@ export default function UserSearchTabs() {
                 {!loading && data.length === 0 && (
                     <p className="text-sm text-muted-foreground">No searches found</p>
                 )}
+
+                <div className="flex gap-2 mb-4">
+                    {[
+                        { key: "today", label: "Today" },
+                        { key: "week", label: "This Week" },
+                        { key: "month", label: "This Month" },
+                        { key: "all", label: "All Time" },
+                    ].map(tab => (
+                        <button
+                            key={tab.key}
+                            onClick={() => setFilter(tab.key as TimeFilter)}
+                            className={`px-3 py-1.5 rounded text-sm border transition
+                ${filter === tab.key
+                                ? "bg-accent border-accent"
+                                : "border-border-light dark:border-border-dark text-muted-foreground hover:bg-accent/10"
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
+
 
                 {data.map((item) => (
                     <div
