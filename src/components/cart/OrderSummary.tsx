@@ -32,14 +32,14 @@ const OrderSummary: NextPage = () => {
             const itemSubtotal = item.price * item.quantity;
             message += `${index + 1}. ${item.title}\n`;
             message += `   • Category: ${item.category}\n`;
-            message += `   • Price: $${item.price.toFixed(2)}\n`;
+            message += `   • Price: MK${item.price.toFixed(2)}\n`;
             message += `   • Qty: ${item.quantity}\n`;
             message += `   • Subtotal: $${itemSubtotal.toFixed(2)}\n\n`;
         });
 
         // Add summary
         message += `--------------------\n`;
-        message += `*Total:* $${subtotal.toFixed(2)}\n`;
+        message += `*Total:* MK${subtotal.toFixed(2)}\n`;
         message += `Please confirm availability and delivery`;
 
         return encodeURIComponent(message);
@@ -97,7 +97,7 @@ const OrderSummary: NextPage = () => {
                     <div className="flex flex-col gap-2 p-2">
                         <p className="text-sm flex justify-between items-center">
                             Subtotal
-                            <span>${subtotal.toFixed(2)}</span>
+                            <span>MK{subtotal.toFixed(2)}</span>
                         </p>
                         <div className="border-b border-border-light dark:border-border-dark pb-2">
                             <div className="text-sm flex justify-between items-center  pb-2">
@@ -105,7 +105,7 @@ const OrderSummary: NextPage = () => {
                                     <Truck className="w-4 h-4"/>
                                     Shipping
                                 </div>
-                                <span>${(shippingCost).toFixed(2)}</span>
+                                <span>MK{(shippingCost).toFixed(2)}</span>
                             </div>
                             <p className="text-xs text-text-secondary">Free shipping on orders over $100</p>
                         </div>
@@ -113,7 +113,7 @@ const OrderSummary: NextPage = () => {
                         <div className="flex flex-col gap-10">
                             <p className="flex justify-between items-center text-sm">
                                 Total
-                                <span>${(shippingCost + subtotal).toFixed(2)}</span>
+                                <span>MK{(shippingCost + subtotal).toFixed(2)}</span>
                             </p>
                             <button
                                 onClick={handleOrderViaWhatsApp}
