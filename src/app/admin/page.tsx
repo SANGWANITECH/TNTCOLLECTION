@@ -81,7 +81,14 @@ function StatRow({ label, value }: { label: string; value: number }) {
         .from("admins") // or your users table
         .select("*", { count: 'exact', head: true });
 
-    if (productsError || ordersError) {
+
+    // fetch search queries
+    const { count: searchesCount, error: searchesError } = await supabase
+        .from("search_queries")
+        .select("*", { count: "exact", head: true });
+
+
+        if (productsError || ordersError) {
         console.error(productsError || ordersError);
         return <div>Error loading metrics</div>;
     }
@@ -111,7 +118,7 @@ function StatRow({ label, value }: { label: string; value: number }) {
                 />
                 <MetricCard
                     title="Total Searches"
-                    value={metrics.searches.toLocaleString()}
+                    value={searchesCount ?? 0}
                     icon={<Search className="w-5 h-5 text-white" />}
                     iconBgColor="bg-[#8b5cf6]"
                 />
