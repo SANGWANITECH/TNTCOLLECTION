@@ -21,6 +21,15 @@ export default async function UserSearchPage() {
         .from("search_queries")
         .select("results_count");
 
+    // Top Searches (All Time)
+// Top Searches (All Time) - Fetching from the new View
+    const { data: topSearches } = await supabase
+        .from("top_search_queries")
+        .select("*")
+        .limit(10);
+
+
+
     const avgResults =
         avgData && avgData.length > 0
             ? Math.round(
@@ -72,7 +81,7 @@ export default async function UserSearchPage() {
                     </div>
                 </div>
                 {/* Recent Searches */}
-                <UserSearchTabs />
+                <UserSearchTabs topSearches={topSearches ?? []} />
             </div>
         </div>
     );

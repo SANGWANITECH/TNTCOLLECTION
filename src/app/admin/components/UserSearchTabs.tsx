@@ -15,7 +15,11 @@ type TimeFilter = "today" | "week" | "month" | "all";
 
 const PAGE_SIZE = 20;
 
-export default function UserSearchTabs() {
+export default function UserSearchTabs({
+                                           topSearches,
+                                       }: {
+    topSearches: { query: string; count: number }[];
+}) {
     const supabase = createClient();
 
     const [page, setPage] = useState(1);
@@ -80,70 +84,105 @@ export default function UserSearchTabs() {
 
 
     return (
-        <div className="card p-4">
-            <h2 className="font-semibold mb-4">Recent Searches</h2>
+        <div className={'flex flex-col gap-8'}>
+            <div className="card p-4">
+                <h2 className="font-semibold mb-4">Recent Searches</h2>
 
-            <div className="space-y-3">
-                {loading && <p className="text-sm text-muted-foreground">Loading…</p>}
+                <div className="space-y-3">
+                    {loading && <p className="text-sm text-muted-foreground">Loading…</p>}
 
-                {!loading && data.length === 0 && (
-                    <p className="text-sm text-muted-foreground">No searches found</p>
-                )}
+                    {!loading && data.length === 0 && (
+                        <p className="text-sm text-muted-foreground">No searches found</p>
+                    )}
 
-                <div className="flex gap-2 mb-4">
-                    {[
-                        { key: "today", label: "Today" },
-                        { key: "week", label: "This Week" },
-                        { key: "month", label: "This Month" },
-                        { key: "all", label: "All Time" },
-                    ].map(tab => (
-                        <button
-                            key={tab.key}
-                            onClick={() => setFilter(tab.key as TimeFilter)}
-                            className={`px-3 py-1.5 rounded text-sm border transition
+                    <div className="flex gap-2 mb-4">
+                        {[
+                            { key: "today", label: "Today" },
+                            { key: "week", label: "This Week" },
+                            { key: "month", label: "This Month" },
+                            { key: "all", label: "All Time" },
+                        ].map(tab => (
+                            <button
+                                key={tab.key}
+                                onClick={() => setFilter(tab.key as TimeFilter)}
+                                className={`px-3 py-1.5 rounded text-sm border transition
                 ${filter === tab.key
-                                ? "bg-accent border-accent"
-                                : "border-border-light dark:border-border-dark text-muted-foreground hover:bg-accent/10"
-                            }`}
+                                    ? "bg-accent border-accent"
+                                    : "border-border-light dark:border-border-dark text-muted-foreground hover:bg-accent/10"
+                                }`}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+
+
+                    {data.map((item) => (
+                        <div
+                            key={item.id}
+                            className="flex justify-between text-sm border-b border-border-light dark:border-border-dark pb-2"
                         >
-                            {tab.label}
-                        </button>
-                    ))}
-                </div>
-
-
-                {data.map((item) => (
-                    <div
-                        key={item.id}
-                        className="flex justify-between text-sm border-b border-border-light dark:border-border-dark pb-2"
-                    >
-                        <span className="font-medium truncate">{item.query}</span>
-                        <span className="text-muted-foreground">
+                            <span className="font-medium truncate">{item.query}</span>
+                            <span className="text-muted-foreground">
                             {item.results_count ?? 0} results
                         </span>
-                    </div>
-                ))}
-            </div>
-            <div className="flex justify-between items-center mt-4">
-                <button
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    disabled={page === 1}
-                    className="text-sm px-3 py-1 border rounded disabled:opacity-40"
-                >
-                    Previous
-                </button>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                    <button
+                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                        className="text-sm px-3 py-1 border rounded disabled:opacity-40"
+                    >
+                        Previous
+                    </button>
 
-                <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-muted-foreground">
                     Page {page}
                 </span>
 
-                <button
-                    onClick={() => setPage(p => p + 1)}
-                    className="text-sm px-3 py-1 border rounded"
-                >
-                    Next
-                </button>
+                    <button
+                        onClick={() => setPage(p => p + 1)}
+                        className="text-sm px-3 py-1 border rounded"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+
+            <div className="card p-4">
+                <h2 className="font-semibold mb-4">Top Searches</h2>
+
+                <div className="space-y-3">
+                    {topSearches.length === 0 && (
+                        <p className="text-sm text-muted-foreground">
+                            No search data yet.
+                        </p>
+                    )}
+
+                    {topSearches.map((item, index) => (
+                        <div
+                            key={item.query}
+                            className="flex justify-between items-center text-sm"
+                        >
+                            <div className="flex items-center gap-2">
+                            <span className="text-muted-foreground">
+                                #{index + 1}
+                            </span>
+                                <span className="font-medium">
+                                {item.query}
+                            </span>
+                            </div>
+
+                            <span className="text-muted-foreground">
+                            {item.count} searches
+                        </span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
+
     );
 }
