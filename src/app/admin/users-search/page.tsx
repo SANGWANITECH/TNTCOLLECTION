@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import UserSearchTabs from "@/app/admin/components/UserSearchTabs";
 
 export default async function UserSearchPage() {
     const supabase = await createClient();
@@ -70,6 +71,8 @@ export default async function UserSearchPage() {
                         </p>
                     </div>
                 </div>
+                {/* Recent Searches */}
+                <UserSearchTabs />
             </div>
         </div>
     );
