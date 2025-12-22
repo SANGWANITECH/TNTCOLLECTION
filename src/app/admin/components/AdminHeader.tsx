@@ -15,11 +15,11 @@ export default function AdminHeader() {
 
             <div className={'hidden lg:flex gap-4 items-center'}>
                 <Link href={'/admin/products'}>Products</Link>
-                <Link href={'/admin/add-product'}>Add Products</Link>
+                <Link href={'/admin/add-products'}>Add Products</Link>
                 <Link href={'/admin/settings'}>Settings</Link>
             </div>
 
-            <div className={'hidden sm:flex flex-1 max-w-md'}>
+            <div className={'flex-1 max-w-md'}>
                 <AdminSearchBar />
             </div>
 

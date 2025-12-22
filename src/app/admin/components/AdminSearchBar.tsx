@@ -11,12 +11,12 @@ const AdminSearchBar: NextPage = () => {
     const handleSearch = (e:React.FormEvent) =>{
         e.preventDefault();
 
-        alert(`The form is submitted! ${search}`);
+        alert(`The form is submited! ${search}`);
     }
     return(
-        <div className={'w-full '}>
+        <div className={'w-full ml-4'}>
             <form onSubmit={handleSearch}>
-                <div className="flex items-center">
+                <div className="hidden sm:flex items-center">
                     <Search
                         onClick={handleSearch}
                         className="z-10 w-5 h-5"/>
