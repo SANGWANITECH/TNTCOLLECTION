@@ -6,26 +6,70 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { Truck, Tag } from "lucide-react";
 import { Button } from "../ui/button";
-import {useRouter} from "next/navigation";
 
 const OrderSummary: NextPage = () => {
-        const [discount, setDiscount] = useState('');
+    const [discount, setDiscount] = useState('');
+    const { cartItems, setSubtotal, shippingCost } = useCart();
 
-        const { cartItems, setSubtotal, shippingCost } = useCart();
-        const router = useRouter();
+    const subtotal = cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity, 0
+    );
 
-        const subtotal = cartItems.reduce(
-            (acc, item) => acc + item.price * item.quantity, 0
-        );
+    useEffect(() => {
+        setSubtotal(subtotal);
+    }, [subtotal, setSubtotal]);
 
-        useEffect(() => {
-            setSubtotal(subtotal);
-        }, [subtotal, setSubtotal]);
+    if(!cartItems.length) {
+        return null;
+    }
 
-        if(!cartItems.length) {
-            return null;
+    // Function to generate WhatsApp message
+    const generateWhatsAppMessage = () => {
+        let message = `Hello TNT Collection,\n\nI'd like to place an order:\n\n*Items*\n`;
+
+        // Add each cart item
+        cartItems.forEach((item, index) => {
+            const itemSubtotal = item.price * item.quantity;
+            message += `${index + 1}. ${item.title}\n`;
+            message += `   • Category: ${item.category}\n`;
+            message += `   • Price: MK${item.price.toFixed(2)}\n`;
+            message += `   • Qty: ${item.quantity}\n`;
+            message += `   • Subtotal: $${itemSubtotal.toFixed(2)}\n\n`;
+        });
+
+        // Add summary
+        message += `--------------------\n`;
+        message += `*Total:* MK${subtotal.toFixed(2)}\n`;
+        message += `Please confirm availability and delivery`;
+
+        return encodeURIComponent(message);
+    };
+
+    const handleOrderViaWhatsApp = async () => {
+        try {
+            const res = await fetch("/api/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cartItems }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error);
+            }
+
+            // Optional: include order ID in WhatsApp message
+            window.open(whatsappUrl + `%0A%0AOrder Ref: #${data.orderId}`, "_blank");
+
+        } catch (err) {
+            alert("Failed to place order. Please try again.");
         }
+    };
 
+
+    // WhatsApp URL with formatted message
+    const whatsappUrl = `https://wa.me/265999868160?text=${generateWhatsAppMessage()}`;
 
     return (
         <div className={'relative w-full sm:max-w-[600px] lg:max-w-[500px] xl:max-w-[600px] mx-auto lg:mt-20'}>
@@ -53,7 +97,7 @@ const OrderSummary: NextPage = () => {
                     <div className="flex flex-col gap-2 p-2">
                         <p className="text-sm flex justify-between items-center">
                             Subtotal
-                            <span>${subtotal.toFixed(2)}</span>
+                            <span>MK{subtotal.toFixed(2)}</span>
                         </p>
                         <div className="border-b border-border-light dark:border-border-dark pb-2">
                             <div className="text-sm flex justify-between items-center  pb-2">
@@ -61,7 +105,7 @@ const OrderSummary: NextPage = () => {
                                     <Truck className="w-4 h-4"/>
                                     Shipping
                                 </div>
-                                <span>${(shippingCost).toFixed(2)}</span>
+                                <span>MK{(shippingCost).toFixed(2)}</span>
                             </div>
                             <p className="text-xs text-text-secondary">Free shipping on orders over $100</p>
                         </div>
@@ -69,15 +113,15 @@ const OrderSummary: NextPage = () => {
                         <div className="flex flex-col gap-10">
                             <p className="flex justify-between items-center text-sm">
                                 Total
-                                <span>${(shippingCost + subtotal).toFixed(2)}</span>
+                                <span>MK{(shippingCost + subtotal).toFixed(2)}</span>
                             </p>
-                            <Button
-                                variant={'primary'}
-                                className="text-sm"
-                                onClick={() => router.push("/tnt/cart/checkout")}
+                            <button
+                                onClick={handleOrderViaWhatsApp}
+                                className="block w-full text-center bg-green-500 text-black font-bold py-3 rounded-xl transition-all shadow-md hover:bg-green-600"
                             >
-                                Proceed To Checkout
-                            </Button>
+                                Continue on WhatsApp
+                            </button>
+
                         </div>
                     </div>
                 </div>

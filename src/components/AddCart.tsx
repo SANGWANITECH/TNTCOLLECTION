@@ -8,12 +8,14 @@ import { useCart } from "@/context/CartContext"
 
 interface Props {
     product: {
-        id: number;
+        id:  number;
+        name: string;
         image: string;
-        title: string;
-        price: number;
         category: string;
+        price: number;
+        is_available: boolean;
         description: string;
+        targetGroup: string
     }
 }
 
@@ -31,7 +33,7 @@ const AddCart: NextPage <Props>= ({product}) => {
             //add product to context
             addToCart({
                 id:product.id,
-                title:product.title,
+                title:product.name,
                 price: product.price,
                 image:product.image,
                 quantity:1,
@@ -50,7 +52,7 @@ const AddCart: NextPage <Props>= ({product}) => {
             onClick={handleAddToCart}
         >
         <ShoppingCartIcon className="w-4 h-4"/>
-        Add to cart
+        Add +
         </Button>
     )
 }

@@ -1,70 +1,55 @@
-import { NextPage } from "next";
+"use client";
+
+import { useEffect, useState } from "react";
 import FeaturedTabs from "./FeaturedTabs";
+import { FrontendProduct } from "@/app/tnt/types/frontendProduct";
+import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 
+export default function FeaturedContent() {
+    const [products, setProducts] = useState<FrontendProduct[]>([]);
+    const [loading, setLoading] = useState(true);
 
-const fetchProductsByCategory = async (category: string) => {
-  try {
-    const res = await fetch(`https://fakestoreapi.com/products/category/${category}`,{next: {revalidate:3600}});
-    if (!res.ok) {
-      throw new Error('Server Error');
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                const res = await fetch("/api/fetchproducts");
+                const data = await res.json();
+                setProducts(data);
+            } catch (err) {
+                console.error("Error fetching products:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchProducts();
+    }, []);
+
+    if (loading) {
+        // Show 6 skeleton cards while loading
+        const skeletons = Array.from({ length: 6 }).map((_, i) => <ProductCardSkeleton key={i} />);
+        return <div className="grid gap-4 sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">{skeletons}</div>;
     }
-    const data = await res.json();
-    return { data, error: null };
-  } catch (error) {
-    console.error(`Error fetching category ${category}:`, error);
-    return { data: null, error: 'Failed to fetch products' };
-  }
-};
 
-const FeaturedContent: NextPage = async () => {
-  const categories = [
-    "men's clothing",
-    "women's clothing",
-    "electronics",
-    "jewelery"
-  ];
+    if (!products.length) {
+        return (
+            <div className="flex flex-col items-center justify-center p-6 border rounded-xl text-center text-gray-500 dark:text-gray-400">
+                <p className="text-lg font-semibold">No products found</p>
+                <p className="text-sm">Please try another category.</p>
+            </div>
+        );
+    }
 
-  const results = await Promise.all(categories.map(fetchProductsByCategory));
+    const tabData: Record<string, FrontendProduct[]> = { all: [...products] };
+    products.forEach((product) => {
+        const key = product.category.toLowerCase().replace(/\s+/g, "_");
+        if (!tabData[key]) tabData[key] = [];
+        tabData[key].push(product);
+    });
 
-  const hasError = results.some(result => result.error !== null);
-
-  if (hasError) {
     return (
-      <div className="text-center my-6 p-6">
-        <h3 className="text-h3">⚠️ Oops!</h3>
-        <p className="text-text-secondary">
-          We couldn’t load some of the featured products. Please check your connection and try again.
-        </p>
-      </div>
+        <div className="max-w-[1500px] m-auto">
+            <FeaturedTabs tabData={tabData} />
+        </div>
     );
-  }
-
-  const tabData = {
-    all: [
-      ...results[0].data, // men
-      ...results[2].data, // electronics
-      ...results[3].data, // jewelery
-    ],
-    men: results[0].data,
-    women: results[1].data,
-    electronics: results[2].data,
-    jewelery: results[3].data
-  };
-
-  return (
-    <div className="max-w-[1500px] m-auto">
-      <div className="text-center my-6 p-6">
-        <h3 className="text-h3">Featured Products</h3>
-        <p className="text-text-secondary">
-          Discover our carefully curated collection of high-quality products from trusted brands around the world.
-        </p>
-      </div>
-      <div>
-        <FeaturedTabs tabData={tabData} />
-      </div>
-    </div>
-  );
-};
-
-
-export default FeaturedContent;
+}

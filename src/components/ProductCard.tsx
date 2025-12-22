@@ -6,32 +6,34 @@ import AddCart from "./AddCart";
 
 interface Props {
   product: {
-    id: number;
-    image: string;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    available?: boolean;
+      id:  number;
+      name: string;
+      image: string;
+      category: string;
+      price: number;
+      is_available: boolean;
+      description: string;
+      targetGroup: string;
   };
 }
 
 const ProductCard = ({ product }: Props) => {
-  const isAvailable = product.available ?? true;
+  const isAvailable = product.is_available;
 
   return (
-    <div
-      key={product.id}
-      className="flex flex-col gap-2 p-4 border border-border-light dark:border-border-dark rounded-2xl w-full sm:max-w-[250px] hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
-    >
+      <div
+          key={product.id}
+          className="flex flex-col gap-2 border border-border-light dark:border-border-dark rounded-2xl w-full sm:max-w-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+      >
+
       {/* IMAGE SECTION */}
       <div className="relative aspect-square rounded-xl overflow-hidden group">
         <Image
-          src={product.image}
-          alt={product.title}
+          src={ `https://ovapnnyjvmiqnoqgdarc.supabase.co/storage/v1/object/public/products/${product.image}`}
+          alt={product.name ||'product name'}
           fill
           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 250px"
-          style={{ objectFit: "contain" }}
+          style={{ objectFit: "cover" }}
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAH0lEQVR42mP8/5+hP6VQwMDA8J+FhwMDgYGjAwAIHhCqZ8b2swAAAABJRU5ErkJggg=="
           className="transition-transform duration-300 group-hover:scale-105"
@@ -65,7 +67,7 @@ const ProductCard = ({ product }: Props) => {
         </div>
 
         {/* TITLE */}
-        <p className="text-body line-clamp-2 font-medium">{product.title}</p>
+        <p className="text-body line-clamp-2 font-medium">{product.name}</p>
 
         {/* PRICE + ADD TO CART */}
         <div className="flex items-center justify-between">

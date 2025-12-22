@@ -15,8 +15,8 @@ const socialLinks = [
 const Footer: NextPage = () => {
     return(
         <div className="card pt-4 ">
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-            <div className="px-2 flex flex-col gap-4">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="px-2 flex flex-col gap-4 ">
                 <h4 className="text-h4">T&T COLLECTION</h4>
                 <p className="text-text-secondary text-sm md:max-w-[300px]">
                     Your trusted partner for quality products. We&apos;re committed to providing the best shopping experience with excellent customer service.
@@ -50,6 +50,19 @@ const Footer: NextPage = () => {
                 </div>
             </div>
 
+            <div className="px-2 flex flex-col gap-2 ">
+                <h4 className="text-h4 ">Categories</h4>
+                <div className="flex flex-col gap-2">
+                <Link href={'/categories'} className="text-sm text-text-secondary">Men</Link>
+                
+                    <Link href={'/products'} className="text-sm text-text-secondary">Women</Link>
+                    
+                    <Link href={'/contact'} className="text-sm text-text-secondary">kids</Link>
+                    <Link href={'/support'} className="text-sm text-text-secondary">Footwear                               </Link>
+                </div>
+            </div>
+
+
 
             {/* Stay Updated */}
             <div className="px-2 flex flex-col gap-2 pb-4">
@@ -64,7 +77,7 @@ const Footer: NextPage = () => {
                 <div>
                     <Link href={'/'} className="text-text-secondary flex items-center gap-2">
                     <Mail className="w-3 h-3"/>
-                    winniecphiri@gmail.com
+                 tntcollections22@gmail.com
                     </Link>
                     <div className="text-sm text-text-secondary flex items-center gap-2">
                         <PhoneCallIcon className="w-3 h-3"/> +265999868160
@@ -72,7 +85,7 @@ const Footer: NextPage = () => {
                                      
                     
                     <div className="text-sm text-text-secondary flex items-center gap-2">
-                        <MapPin className="w-3 h-3"/>are 49 gulliver_new shire, lilongwe, Malawi
+                        <MapPin className="w-3 h-3"/>area 49 gulliver_new shire, lilongwe, Malawi
                     </div>
                 </div>
             </div>
@@ -80,7 +93,7 @@ const Footer: NextPage = () => {
         </div>
             {/* final links */}
             <div className="flex flex-col gap-2 items-center sm:flex-row justify-between px-4 border-t border-border-dark pt-4">
-                <p className="text-sm text-text-secondary">© 2025   tnt-collection. All rights reserved.</p>
+                <p className="text-sm text-text-secondary text-ce">© 2025   tnt-collection. All rights reserved.</p>
                 <div className="flex items-center gap-4">
                     <Link href={'/'} className="text-sm text-text-secondary">Privacy</Link>
                     <Link href={'/'} className="text-sm text-text-secondary">Terms</Link>

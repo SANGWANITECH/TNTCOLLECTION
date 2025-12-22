@@ -46,7 +46,7 @@ const CartProducts: NextPage = () => {
                         {/* 1st section: Image */}
                         <div className="relative w-full max-w-[50px] h-[60px]">
                             <Image 
-                            src={cartItem.image}
+                            src={ `https://ovapnnyjvmiqnoqgdarc.supabase.co/storage/v1/object/public/products/${cartItem.image}`}
                             alt={cartItem.title}
                             fill
                             />
@@ -57,7 +57,7 @@ const CartProducts: NextPage = () => {
                             <p className="font-semibold text-sm line-clamp-2">
                                 {cartItem.title}
                             </p>
-                            <p className="text-sm bg-gray-100 rounded-full dark:bg-background-color-dark px-2 border border-border-light dark:border-border-dark w-[110px]">
+                            <p className="text-sm w-fit bg-gray-100 rounded-full dark:bg-background-color-dark px-2 border border-border-light dark:border-border-dark]">
                                 {cartItem.category}
                             </p>
                         </div>
@@ -95,7 +95,7 @@ const CartProducts: NextPage = () => {
                             </div>
                             {/*final card section */}
                             <div className="flex justify-between items-center flex-col gap-2 sm:items-start">
-                                <p className="font-semibold text-sm">${cartItem.price * cartItem.quantity}</p>
+                                <p className="font-semibold text-sm">MK{cartItem.price * cartItem.quantity}</p>
                                 <button 
                                 onClick={()=>removeFromCart(cartItem.id)}
                                 className="text-red-500 dark:text-red-400 text-sm flex items-center gap-1 cursor-pointer">

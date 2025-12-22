@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/Heade";
-import Footer from "@/components/Footer";
+import { Toaster } from "sonner";
 import { CartProvider } from "@/context/CartProvider";
 
 
@@ -32,16 +31,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
-            <ThemeProvider
+      <CartProvider>
+                      <ThemeProvider
               attribute="class"
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
             >
               <div>
-                {children}
+                  {children}
+                  <Toaster position="top-right" />
               </div>
             </ThemeProvider>
+      </CartProvider>
       </body>
     </html>
   );
