@@ -1,0 +1,95 @@
+[33m5565053[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m Fix icon background color formatting in Total Searches metric display
+[33mb2db791[m Fix icon background color formatting in Total Searches metric display
+[33m749cacd[m Fix currency symbol in OrderSummary component subtotal display
+[33ma169b4e[m added final fix
+[33m3eda1e0[m Merge branch 'dev' of https://github.com/SANGWANITECH/TNTCOLLECTION into dev
+[33mb66b020[m Merge pull request #69 from SANGWANITECH/admin/searches
+[33me7a2489[m[33m ([m[1;31morigin/admin/searches[m[33m, [m[1;32madmin/searches[m[33m)[m Fetch and display total search queries count in metrics
+[33m658fee2[m Merge pull request #68 from SANGWANITECH/admin/searches
+[33m7550d77[m Enhance admin authentication flow with email verification against authorized admins
+[33m2b83730[m Merge pull request #67 from SANGWANITECH/admin/searches
+[33m8be739c[m Add top searches display to UserSearchTabs component
+[33mbbeeab0[m Merge pull request #66 from SANGWANITECH/admin/searches
+[33m71b78e5[m Add time filter to UserSearchTabs for recent searches
+[33mcfff964[m Merge pull request #65 from SANGWANITECH/admin/searches
+[33mea468ed[m Add UserSearchTabs component to display recent search queries
+[33mda5a52d[m Merge pull request #64 from SANGWANITECH/admin/searches
+[33md657c0e[m Log search queries with results count and display average results on search page
+[33mc0c0aac[m Merge pull request #63 from SANGWANITECH/admin/searches
+[33mb4a58bb[m Add search analytics overview to UserSearchPage
+[33mab5ba89[m Merge pull request #62 from SANGWANITECH/admin/searches
+[33mfaab4da[m Log search queries to analytics on search input
+[33me675218[m Merge pull request #61 from SANGWANITECH/admin/searches
+[33m5e9ff25[m Remove unnecessary padding from OrdersTabs component
+[33m1ef0d83[m Merge pull request #60 from SANGWANITECH/admin/searches
+[33m9590b6d[m Update currency format from USD to MK in cart and order summary components
+[33m5e58a87[m Merge pull request #59 from SANGWANITECH/admin/searches
+[33m24ee4c1[m Add search results page and enhance search input handling
+[33m87bbdea[m Merge pull request #58 from SANGWANITECH/admin/searches
+[33m5b93222[m Add search functionality with suggestions and results page
+[33m47f2736[m Merge pull request #57 from SANGWANITECH/admin/dashboard
+[33m7a5d243[m[33m ([m[1;31morigin/admin/dashboard[m[33m, [m[1;32madmin/dashboard[m[33m)[m Add detailed metrics and quick stats to Admin Dashboard
+[33mcc2e32d[m Merge pull request #56 from SANGWANITECH/admin/dashboard
+[33m4005c30[m Add metrics display and quick stats section to Admin Dashboard
+[33m8841fa7[m Merge pull request #55 from SANGWANITECH/admin/order
+[33m186391d[m[33m ([m[1;31morigin/admin/order[m[33m, [m[1;32madmin/order[m[33m)[m Add CancelOrderButton component and integrate it into OrdersTabs for order cancellation
+[33m161973a[m Merge pull request #54 from SANGWANITECH/admin/order
+[33m924ab92[m Add order management features with real-time updates and Google OAuth integration
+[33m338e094[m Merge branch 'dev' of https://github.com/SANGWANITECH/TNTCOLLECTION into dev
+[33m5821407[m  ai added
+[33m6cadb5d[m Merge pull request #53 from SANGWANITECH/admin/order
+[33m624e142[m Update order date field and enhance OrdersTabs component with order details and total calculation
+[33mb3aedab[m Merge pull request #52 from SANGWANITECH/admin/order
+[33m79a596c[m Add order management types and implement OrdersTabs component for filtering orders
+[33m62bec52[m Merge pull request #51 from SANGWANITECH/admin/order
+[33ma4c55f7[m Implement order creation via WhatsApp with API integration and UI updates
+[33mcdbfe12[m Merge pull request #50 from SANGWANITECH/admin/order
+[33m99ca570[m Add WhatsApp order sharing functionality to OrderSummary component
+[33m2143e37[m Merge pull request #49 from SANGWANITECH/admin/new-edit-product
+[33mf09a94a[m[33m ([m[1;31morigin/admin/new-edit-product[m[33m, [m[1;32madmin/new-edit-product[m[33m)[m Add edit product functionality with form handling and image upload
+[33m2bf4f55[m Merge pull request #48 from SANGWANITECH/admin/new-edit-product
+[33me84e81d[m Refactor add-product context and component imports for improved structure
+[33m331d20f[m Merge pull request #47 from SANGWANITECH/admin/new-edit-product
+[33m0a31ee0[m Add instant UI update and rollback for product deletion in Actions component
+[33m68a86b2[m Merge pull request #46 from SANGWANITECH/admin/new-edit-product
+[33mf45add6[m Implement product creation with validation and success notifications
+[33m927a420[m Merge pull request #45 from SANGWANITECH/admin/new-edit-product
+[33m0dd2b79[m Add product deletion confirmation and success/error notifications
+[33m003af37[m Merge pull request #44 from SANGWANITECH/admin/new-edit-product
+[33m2802aab[m Enhance popup styling and button interactions in product actions
+[33m7c085a3[m Merge pull request #43 from SANGWANITECH/admin/new-edit-product
+[33mdb48ffe[m Update product image handling and improve delete functionality
+[33md5a5117[m Merge pull request #42 from SANGWANITECH/admin/new-edit-product
+[33m4d7ee5a[m Refactor ProductCard component to remove edit and delete handlers
+[33mc6a0b55[m Add product deletion functionality and popup in ProductCard component
+[33m557435c[m Implement product fetching and loading skeletons in FeaturedContent component
+[33m409f078[m Implement product fetching and loading skeletons in FeaturedContent component
+[33me737763[m Refactor FeaturedContent component for cleaner code and improved readability
+[33m1bcfa7a[m Merge pull request #41 from SANGWANITECH/admin/edit-product
+[33m30a63be[m[33m ([m[1;31morigin/admin/edit-product[m[33m, [m[1;32madmin/edit-product[m[33m)[m Fix price parsing in CreateProduct to handle comma-separated values
+[33m656e6d1[m Merge pull request #40 from SANGWANITECH/admin/edit-product
+[33mfc49e30[m Update Next.js version to 16.0.7 in package.json and package-lock.json
+[33ma6e5836[m Update ProductCard image style to use 'cover' for better display
+[33m975069b[m Merge pull request #39 from SANGWANITECH/frontend-fix
+[33mc22db9d[m[33m ([m[1;31morigin/frontend-fix[m[33m, [m[1;32mfrontend-fix[m[33m)[m Refactor layout.tsx to properly wrap components with CartProvider
+[33m4119866[m Add additional image domain to Next.js configuration
+[33m843abfb[m Fix formatting issues in supabase-server.ts by removing merge conflict markers
+[33m551a4e9[m Remove unused image domains from Next.js configuration
+[33m644e389[m Merge branch 'frontend-fix' of https://github.com/SANGWANITECH/TNTCOLLECTION into frontend-fix
+[33m62abf78[m Refactor product data structure and update FeaturedContent to fetch products from Supabase
+[33m92fe84c[m Merge pull request #38 from SANGWANITECH/frontend-fix
+[33mf447cb2[m Merge branch 'dev' into frontend-fix
+[33mdc6e891[m Update Next.js version to 16.0.7 in package.json and package-lock.json
+[33m18488f3[m Fix phone link in page component and update project dictionary
+[33mbb8ca19[m Merge branch 'frontend-fix' into dev
+[33m119c72d[m  the contact page
+[33m56f27b7[m Merge pull request #37 from SANGWANITECH/admin/edit-product
+[33medeb396[m Implement product creation form with validation and image upload functionality
+[33m8150525[m Merge pull request #36 from SANGWANITECH/admin/edit-product
+[33mf5876ec[m Update AddProduct context and components to handle string prices and default selections for category and target group
+[33me587523[m Merge pull request #35 from SANGWANITECH/admin/edit-product
+[33m9cda9e9[m Add AddProductCategory and AddProductTargetGroup components; integrate them into ProductDetails for category and target group selection
+[33m81e8506[m Merge pull request #34 from SANGWANITECH/admin/edit-product
+[33m4207435[m Fetch products in FilterCategoryProvider on mount; update context to provide fetched products
+[33m2587617[m Merge pull request #33 from SANGWANITECH/admin/edit-product
+[33medcd2a2[m Fetch products directly from Supabase in AdminDas
