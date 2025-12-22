@@ -50,10 +50,26 @@ export default function SearchInput() {
         return () => clearTimeout(debounce)
     }, [query])
 
+    const logSearchQuery = async (searchTerm: string) => {
+        try {
+            await supabase
+                .from("search_queries")
+                .insert({
+                    query: searchTerm.trim().toLowerCase(),
+                });
+        } catch (err) {
+            // silently fail — never block UX for analytics
+            console.error("Search log failed", err);
+        }
+    };
+
+
     const handleSearch = (searchQuery?: string) => {
         const searchTerm = searchQuery || query;
         if (!searchTerm.trim()) return;
         setShowDropdown(false);
+
+        logSearchQuery(searchTerm);
 
         // Update input field if a specific query is provided
         if (searchQuery) {
