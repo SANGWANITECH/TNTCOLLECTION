@@ -44,7 +44,7 @@ export default function OrdersTabs({ orders }: { orders: Order[] }) {
 
 
     return (
-        <div className="space-y-4 px-4 py-6 max-w-[800px] mx-auto">
+        <div className="space-y-4 py-6 max-w-[800px] mx-auto">
             {/* Tabs */}
             <div className="flex gap-2">
                 {TABS.map(tab => (
