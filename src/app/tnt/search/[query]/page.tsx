@@ -19,11 +19,26 @@ export default async function SearchResultPage({
             type: 'websearch',
             config: 'english'
         })
-        .order('created_at', { ascending: false }); // Change this to false for descending
+        .order('created_at', { ascending: false });
 
     if (error) {
         return <div className="p-20 text-center">Error fetching results.</div>;
     }
+
+// ✅ LOG SEARCH HERE
+    const resultsCount = products?.length ?? 0;
+
+    try {
+        await supabase
+            .from("search_queries")
+            .insert({
+                query: decodedQuery.toLowerCase(),
+                results_count: resultsCount,
+            });
+    } catch (logError) {
+        console.error("Failed to log search:", logError);
+    }
+
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-20 min-h-screen">
