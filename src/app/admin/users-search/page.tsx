@@ -15,8 +15,22 @@ export default async function UserSearchPage() {
 
     const uniqueQueries = new Set(uniqueData?.map(q => q.query)).size;
 
+    // Average Results
+    const { data: avgData } = await supabase
+        .from("search_queries")
+        .select("results_count");
+
+    const avgResults =
+        avgData && avgData.length > 0
+            ? Math.round(
+                avgData.reduce((sum, row) => sum + (row.results_count ?? 0), 0) /
+                avgData.length
+            )
+            : 0;
+
+
     return (
-        <div>
+        <div className={'w-full max-w-7xl mx-auto pt-8'}>
             <div className="flex flex-col gap-6">
                 <div>
                     <h1 className="font-semibold text-[24px] mb-1">
@@ -47,12 +61,12 @@ export default async function UserSearchPage() {
                         </p>
                     </div>
 
-                    <div className="card p-4 opacity-60">
+                    <div className="card p-4">
                         <p className="text-[#888] text-sm mb-1">
                             Avg Results
                         </p>
                         <p className="font-semibold text-lg">
-                            —
+                            {avgResults}
                         </p>
                     </div>
                 </div>
