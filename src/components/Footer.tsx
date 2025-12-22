@@ -77,7 +77,7 @@ const Footer: NextPage = () => {
                 <div>
                     <Link href={'/'} className="text-text-secondary flex items-center gap-2">
                     <Mail className="w-3 h-3"/>
-                    winniecphiri@gmail.com
+                 tntcollections22@gmail.com
                     </Link>
                     <div className="text-sm text-text-secondary flex items-center gap-2">
                         <PhoneCallIcon className="w-3 h-3"/> +265999868160
