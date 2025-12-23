@@ -34,13 +34,12 @@ const OrderSummary: NextPage = () => {
             message += `   • Category: ${item.category}\n`;
             message += `   • Price: MK${item.price.toFixed(2)}\n`;
             message += `   • Qty: ${item.quantity}\n`;
-            message += `   • Subtotal: $${itemSubtotal.toFixed(2)}\n\n`;
+            message += `   • Subtotal: MK${itemSubtotal.toFixed(2)}\n\n`;
         });
 
         // Add summary
         message += `--------------------\n`;
         message += `*Total:* MK${subtotal.toFixed(2)}\n`;
-        message += `Please confirm availability and delivery`;
 
         return encodeURIComponent(message);
     };
