@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 const sidebarItems = [
-    { label: "Dashboard", icon: LayoutDashboard, href: "/admin/dashboard" },
+    { label: "Dashboard", icon: LayoutDashboard, href: "/admin/" },
     { label: "Products", icon: ShoppingBasket, href: "/admin/products" },
     { label: "Add Product", icon: PackagePlus, href: "/admin/add-product" },
     { label: "Orders", icon: ShoppingBag, href: "/admin/orders" },
@@ -47,7 +47,7 @@ export default function AdminSidebar() {
             {/* Backdrop overlay on mobile */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 dark:bg-black bg-white bg-opacity-30 md:hidden"
+                    className="fixed inset-0  bg-opacity-30 md:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
@@ -55,19 +55,18 @@ export default function AdminSidebar() {
             {/* Sidebar */}
             <div
                 ref={sidebarRef}
-                className={`fixed md:static left-0 z-40
+                className={`fixed left-0 z-40 pt-10 lg:pt-16
                 flex flex-col w-[200px] h-screen
-                p-4 shadow-md border-r border-border-light dark:border-border-dark
+                p-4 shadow-md border-r bg-white dark:bg-background-color-dark border-border-light dark:border-border-dark
                 transform transition-transform duration-300 ease-in-out
                 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
               `}
-
             >
                 <h2 className="font-medium text-lg flex items-center gap-2 mb-4">
                     <ShieldUser className="w-5 h-5 text-green-500" />
                     T&T Admin
                 </h2>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-4">
                     {sidebarItems.map(({ label, icon: Icon, href }) => (
                         <Link
                             href={href}
