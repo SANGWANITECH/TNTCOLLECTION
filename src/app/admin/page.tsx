@@ -1,7 +1,7 @@
+export const dynamic = 'force-dynamic';
 // Import the server Supabase client
 import { supabaseServer } from "@/utils/supabase/supabase-server";
 import { ShoppingCart, Package, Search, Users, Bell } from "lucide-react";
-
 
 interface MetricCardProps {
     title: string;
