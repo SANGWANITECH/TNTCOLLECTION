@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { ModeToggle } from "./theme-toggle";
@@ -15,6 +15,11 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentPath = usePathname();
   const isAdminPage = currentPath.startsWith("/admin");
+
+    // Close mobile menu when path changes
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [currentPath])
 
     {/*Don't display header on admin*/}
     if (isAdminPage) return null;
