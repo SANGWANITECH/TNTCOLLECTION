@@ -37,6 +37,7 @@ const ProductCard = ({ product }: Props) => {
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAH0lEQVR42mP8/5+hP6VQwMDA8J+FhwMDgYGjAwAIHhCqZ8b2swAAAABJRU5ErkJggg=="
           className="transition-transform duration-300 group-hover:scale-105"
+          unoptimized
         />
 
         {/* AVAILABILITY BADGE */}

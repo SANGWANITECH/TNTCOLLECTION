@@ -24,6 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     style={{ objectFit: "cover" }}
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAH0lEQVR42mP8/5+hP6VQwMDA8J+FhwMDgYGjAwAIHhCqZ8b2swAAAABJRU5ErkJggg=="
+                    unoptimized
                 />
 
                 <div className="absolute text-white bottom-2 left-2 text-xs font-medium px-2 py-1 rounded-full bg-background-color-dark/40 backdrop-blur-sm">
