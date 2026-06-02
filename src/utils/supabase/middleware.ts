@@ -70,12 +70,5 @@ const {
     }
   }
 
-  // Signed in user visiting login page
-  if (user && request.nextUrl.pathname.startsWith('/tnt/auth')) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/admin'
-    return NextResponse.redirect(url)
-  }
-
   return supabaseResponse
 }
