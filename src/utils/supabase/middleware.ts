@@ -6,35 +6,27 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          )
-
-          supabaseResponse = NextResponse.next({
-            request,
-          })
-
-          cookiesToSet.forEach(({ name, value }) =>
-            supabaseResponse.cookies.set(name, value)
-          )
-        },
+ const supabase = createServerClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+  {
+    cookies: {
+      getAll: () => request.cookies.getAll(),
+      setAll: (cookies) => {
+        cookies.forEach(({ name, value }) => request.cookies.set(name, value))
+        supabaseResponse = NextResponse.next({ request })
+        cookies.forEach(({ name, value }) =>
+          supabaseResponse.cookies.set(name, value)
+        )
       },
-    }
-  )
+    },
+  }
+)
 
-  // Don't put logic before this
-  const { data } = await supabase.auth.getClaims()
-
-  const user = data?.claims
+// ALWAYS use real user, not claims
+const {
+  data: { user },
+} = await supabase.auth.getUser()
 
   // Redirect "/" -> "/tnt"
   if (request.nextUrl.pathname === '/') {
@@ -55,32 +47,25 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Protect admin routes
-  if (user && request.nextUrl.pathname.startsWith('/admin')) {
-    const {
-      data: { user: authUser },
-    } = await supabase.auth.getUser()
-
-    const email = authUser?.email?.toLowerCase()
-
-    if (!email) {
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (!user) {
       const url = request.nextUrl.clone()
       url.pathname = '/tnt/auth/login'
       return NextResponse.redirect(url)
     }
 
-    const { data: adminRecord } = await supabase
+    const email = user.email?.toLowerCase()
+
+    const { data: admin } = await supabase
       .from('admins')
       .select('email')
       .eq('email', email)
       .single()
 
-    if (!adminRecord) {
-      await supabase.auth.signOut()
-
+    if (!admin) {
       const url = request.nextUrl.clone()
       url.pathname = '/tnt/auth/login'
       url.searchParams.set('error', 'not_authorized')
-
       return NextResponse.redirect(url)
     }
   }
