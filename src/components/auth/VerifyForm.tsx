@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 
@@ -10,7 +10,6 @@ export default function VerifyForm() {
     const [code, setCode] = useState("");
     const [status, setStatus] = useState("");
     const [error, setError] = useState(false);
-    const router = useRouter();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/\D/g, "").slice(0, 8);
@@ -44,7 +43,7 @@ export default function VerifyForm() {
 
         setError(false);
         setStatus("Success! Redirecting...");
-        router.push(`/admin`);
+        window.location.assign('/admin');
     };
 
     if (!email) {
